@@ -4,7 +4,7 @@ var canvas;
 var ctx;
 
 function init() {
-    canvas = document.getElementById('#meme-canvas');
+    canvas = document.getElementById('meme-canvas');
     ctx = canvas.getContext('2d');
 } 
 
@@ -30,26 +30,59 @@ function onChangeColor() {
     changeColor(elColor)
 }
 
-function onFontChange(){
-    fontChange(font)
+function onChangeFont(elFont){
+    changeFont(elFont)
 }
 
+function onChangeStyle(style) {
+    changeStyle(style)
+}
+
+function onToggleTextBorder(){
+    let elBorderBtn = document.querySelector('.font-border-btn').innerText;
+
+    if (elBorderBtn === 'Font Border'){
+        changeBorder('1px solid black')
+        elBorderBtn ='Remove Font Border';
+    } else {
+        changeBorder('none')
+        elBorderBtn = 'Font Border'
+    }
+    
+}
 
 //------------------------------------------------
 
 //FUNCTION - RENDER CAVAS
 
-function drawImage() {
-    var canvas = document.getElementById('myCanvas');
-    var context = canvas.getContext('2d');
+function clearCanvas() {
+    ctx.fillStyle = 'white';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+}
 
+// function onAddText
+
+function drawImage(imgPath) {
     var img = new Image();
-    img.src = "img/koala.jpg";
+    img.src = imgPath;
 
     img.onload = function () {
-        context.drawImage(img, 0, 0, 400, 360);
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
     };
 }
+
+
+// function onDrawText(ev){
+//     ev
+// }
+function drawText(x,y) {
+    var meme = getMemeProp()
+    ctx.font = `${meme.fontSize}px,${meme.fontFamily}`;
+    ctx.fillText(`${meme.text}, ${meme.fontSize}px, auto`);
+
+}
+
 
 
 //-----------------------------------------------

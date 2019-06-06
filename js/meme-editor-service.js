@@ -5,9 +5,9 @@ let gCurrMeme = {
     text: 'text',
     fontSize: '16',
     fontColor: 'rgb(0, 0, 0)',
-    fontFamily: '',
-    fontStyle: 'inherit',
-    textLocation: '0,0',
+    fontFamily: 'eurofurence',
+    fontStyle: 'none',
+    textLocation: {x:'0', y:'0'},
     textBorder: 'none',
 }
 
@@ -31,9 +31,24 @@ function changeColor(color){
     gCurrMeme.fontColor = color;
 }
 
-function fontChange(font) {
+function changeFont(font) {
     gCurrMeme.fontFamily = font;
 }
+
+function changeStyle(style) {
+    gCurrMeme.fontStyle = style;
+}
+
+function changeBorder(border) {
+    gCurrMeme.textBorder = border;
+}
+
+function getMemeProp(){
+    return gCurrMeme;
+}
+
+
 //------------------------------------------------
 
 //FUNCTION - RENDER CAVAS
+

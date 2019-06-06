@@ -10,7 +10,7 @@
     <title>Meme Generator</title>
 </head>
 
-<body>
+<body onload="init()">
 
     <header class="flex align-center">
         <label for="menu-checklist" class="nav-menu-toggle-label justify-self-start"><i class="fas fa-bars"></i></label>
@@ -59,24 +59,45 @@
             </ul>
 
         <section class="meme-editor-canvas container">
-            <canvas id="meme-canvas" width="300" height="300">
-        
+            <canvas onclick="onDrawText(event)" id="meme-canvas" width="300" height="300">
+                    
             </canvas>
             <div class="meme-editor container">
-                <div class="image-change">Change Image</div>
+                <div class="clear-canvas">
+                    <button class="clear-canvas-btn" onclick="clearCanvas()">Clear Canvas</button>
+                </div>
+                <div class="image-change">
+                    Change Image
+                </div>
+                <div class="text-add-div">
+                    <label for="text-add">Write Meme</label>
+                    <input class="text-add" type="text">
+                </div>
                 <div class="font-size-div">
-                    Font Size: <input onchange=" onChangeFontSize()" class="font-size-change" type="number" min="10">
+                    Change Font Size: <input onchange=" onChangeFontSize()" class="font-size-change" type="number" min="10">
                 </div>
                 <div class="font-color-div">
                     Change Color: <input onchange="onChangeColor()" type="color" class="font-color-change">
                 </div>
                 <div class="change-font-div">
-                    <select>
-                        <option value="font-ariel">Ariel</option>
-                        <option value="font-tahoma">Tahoma</option>
-
+                    Change Font:
+                    <select onchange="onChangeFont(this.value)">
+                        <option value="eurofurence"></option>
+                        <option value="ariel">Ariel</option>
+                        <option value="tahoma">Tahoma</option>
                     </select>
                 </div>
+                <div class="font-style">
+                    Change Font Style: 
+                    <button onclick="onChangeStyle('bold')" class="style-bold">Bold</button>
+                    <button onclick="onChangeStyle('italic')" class="style-italic">Italic</button>
+                    <button onclick="onChangeStyle('uppercase')" class="style-uppercase">Upper Case</button>
+                </div>
+                <div class="font-border">
+                    Font Wide:
+                    <button onclick="onToggleTextBorder()" class="font-border-btn">Font Border</button>
+                </div>
+
             </div>
         </section>
     </main>

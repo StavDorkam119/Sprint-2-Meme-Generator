@@ -12,8 +12,8 @@
 
 <body>
 
-    <header class="flex space-around align-center">
-        <label for="menu-checklist" class="nav-menu-toggle-label"><i class="fas fa-bars"></i></label>
+    <header class="flex align-center">
+        <label for="menu-checklist" class="nav-menu-toggle-label justify-self-start"><i class="fas fa-bars"></i></label>
         <input id="menu-checklist" type="checkbox" name="checklist">
         <nav>
             <ul class="clean-list nav-menu">
@@ -30,16 +30,21 @@
                 </li>
             </ul>
         </nav>
-        <h1>Meme Generator</h1>
+        <h1 class="justify-self-center">Meme Generator</h1>
 
     </header>
 
     <main>
-        <section class="main-gallery">
-            <ul class="clean-list">
-                <li><a><img src="imgs/004.jpg" /></a></li>
+            <ul class="clean-list main-gallery">
+                <li class="gallery-item"><a><img src="imgs/004.jpg" /></a></li>
+                <li class="gallery-item"><a><img src="imgs/005.jpg" /></a></li>
+                <li class="gallery-item"><a><img src="imgs/12.jpg" /></a></li>
+                <li class="gallery-item"><a><img src="imgs/Ancient-Aliens.jpg" /></a></li>
+                <li class="gallery-item"><a><img src="imgs/004.jpg" /></a></li>
+                <li class="gallery-item"><a><img src="imgs/004.jpg" /></a></li>
+                <li class="gallery-item"><a><img src="imgs/004.jpg" /></a></li>
+                <li class="gallery-item"><a><img src="imgs/004.jpg" /></a></li>
             </ul>
-        </section>
 
         <section class="meme-editor-canvas container">
             <canvas id="meme-canvas" width="300" height="300">

@@ -122,9 +122,9 @@ header input:checked+nav {
 
 .main-gallery.clean-list{
     display: grid;
-    max-width: 100%;
-    grid-template-columns: repeat(4, 1fr);
-    grid-auto-rows: auto;
+    /* max-width: 20rem; */
+    /* grid-template-columns: repeat(4, 1fr); */
+    /* grid-auto-rows: 160px; */
     margin: 2rem auto;
 }
 
@@ -132,6 +132,21 @@ header input:checked+nav {
     grid-column: span 2;
     position: relative;
 }
+
+.gallery-item a {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    /* width: 100%;
+    height: 100%; */
+    display: inline-block;
+    clip-path: polygon(50% 0, 93.3% 25%, 93.3% 75%, 50% 100%, 6.7% 75%, 6.7% 25%);
+}
+
+
+
 
 .gallery-item::before { /* Goldenrod outline on the hexagon */
 	content: "";
@@ -214,3 +229,28 @@ header input:checked+nav {
 
 
 /* CSS Helpers */
+
+/* Media Rules */
+
+@media (min-width: 17rem) {
+    .main-gallery.clean-list{
+        max-width: 20rem;
+        grid-template-columns: repeat(4, 5rem);
+        grid-auto-rows: 160px;
+    }
+    .gallery-item:nth-child(3n) {grid-column: 2/ span 2}
+}
+
+@media (min-width: 32rem) {
+    .main-gallery.clean-list{
+        max-width: 30rem;
+        grid-template-columns: repeat(6, 5rem);
+    }
+    .gallery-item:nth-child(3n) {
+        grid-column: unset;
+        grid-column: span 2;
+    }
+
+    /* .gallery-item:nth-child(4n) {grid-column: 2/ span 2;}
+    .gallery-item:nth-child(4n+1) {grid-column: 4/ span 2;} */
+}

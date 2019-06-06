@@ -78,6 +78,8 @@ function drawImage(imgPath) {
 }
 
 function onDrawText(ev){
+    console.log(ev);
+    
     let {offsetX, offsetY} = ev;
     // let offsetY = ev.offsetY;
     // offsetX = offsetX*1.5;
@@ -87,13 +89,14 @@ function onDrawText(ev){
 
 function drawText(x,y) {
     var meme = getMemeProp()
-    ctx.fillStyle = `${meme.fontColor}`;
+    ctx.fillStyle = meme.fontColor;
     if (meme.textBorder !=='none') ctx.strokeStyle = `${meme.textBorder}`
     ctx.textAlign ='center';
     ctx.textBaseline = "middle";
     ctx.font = `${meme.fontSize}px ${meme.fontFamily}`;
     ctx.fillText(`${meme.text}`, x,y);
     ctx.strokeText(`${meme.text}`,x,y)
+    console.log(ctx.measureText(meme.text).width)
 }
 
 

@@ -11,13 +11,11 @@ let gMeme = {
     textBorder: 'none',
 }
 
-<<<<<<< HEAD
 let gImgs = [
     createImgTemplate()
 ];
 
 
-=======
 function createMeme(){
     var meme = {
         image: 'imgs/004.jpg',
@@ -31,7 +29,6 @@ function createMeme(){
     }
     return meme;
 }
->>>>>>> 358c21949f457385c1e999d4f09e22e0c168bb98
 //-----------------------------------------------
 
 function createImgTemplate(image) {
@@ -94,3 +91,12 @@ function changeImage(imgPath){
 
 //FUNCTION - RENDER CAVAS
 
+function setTextPosition(x, y, width, height) {
+    let textPosition = {
+        leftUp: { x: x, y: y + height },
+        leftDown: {x: x, y: y},
+        rightUp: {x: x + width, y: y + height},
+        rightDown: {x: x+width, y: y}
+    }
+    
+}

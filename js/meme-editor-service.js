@@ -11,7 +11,27 @@ let gCurrMeme = {
     textBorder: 'none',
 }
 
+let gImgs = [
+    createImgTemplate()
+];
+
+
 //-----------------------------------------------
+
+function createImgTemplate(image) {
+    return  {
+        id: makeId(),
+        image: '01',
+        text: 'text',
+        fontSize: '16',
+        fontColor: 'rgb(0, 0, 0)',
+        fontFamily: 'eurofurence',
+        fontStyle: 'none',
+        textLocation: {x:'0', y:'0'},
+        textBorder: 'none',
+    }
+}
+
 
 //FUNCTION - USER EDIT MEME 
 

@@ -1,11 +1,11 @@
 'use strict'
 
-var canvas;
-var ctx;
+const gCanvas;
+const gCtx;
 
 function init() {
-    canvas = document.getElementById('meme-canvas');
-    ctx = canvas.getContext('2d');
+    gCanvas = document.getElementById('meme-canvas');
+    gCtx = gCanvas.getContext('2d');
 } 
 
 //-----------------------------------------------
@@ -56,9 +56,9 @@ function onToggleTextBorder(){
 //FUNCTION - RENDER CAVAS
 
 function clearCanvas() {
-    ctx.fillStyle = 'white';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    gCtx.fillStyle = 'white';
+    gCtx.fillRect(0, 0, gCanvas.width, gCanvas.height);
+    gCtx.clearRect(0, 0, gCanvas.width, gCanvas.height);
 }
 
 
@@ -67,7 +67,7 @@ function drawImage(imgPath) {
     img.src = imgPath;
 
     img.onload = function () {
-        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        gCtx.drawImage(img, 0, 0, gCanvas.width, gCanvas.height);
     };
 }
 
@@ -82,9 +82,9 @@ function onDrawText(ev){
 
 function drawText(x,y) {
     var meme = getMemeProp()
-    ctx.font = `${meme.fontSize}px,${meme.fontFamily}`;
-    ctx.fillText(`'${meme.text}'`, x,y);
-    ctx.strokeText(`'${meme.text}'`,x,y)
+    gCtx.font = `${meme.fontSize}px,${meme.fontFamily}`;
+    gCtx.fillText(`'${meme.text}'`, x,y);
+    gCtx.strokeText(`'${meme.text}'`,x,y)
 }
 
 
@@ -92,6 +92,6 @@ function drawText(x,y) {
 //-----------------------------------------------
 
 function downloadImg(elLink) {
-    var imgContent = canvas.toDataURL('image/jpeg');
+    var imgContent = gCanvas.toDataURL('image/jpeg');
     elLink.href = imgContent
 }

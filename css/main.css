@@ -105,6 +105,7 @@ header input:checked+nav {
 #meme-canvas {
     border: 1px solid black;
 }
+
 .list-item a {
     height: 100%;
     width: 100%;
@@ -120,7 +121,7 @@ header input:checked+nav {
     padding: 10px;
 }
 
-.main-gallery.clean-list{
+.main-gallery.clean-list {
     display: grid;
     /* max-width: 20rem; */
     /* grid-template-columns: repeat(4, 1fr); */
@@ -148,18 +149,24 @@ header input:checked+nav {
 
 
 
-.gallery-item::before { /* Goldenrod outline on the hexagon */
-	content: "";
-	position: absolute;
-	top: 0; bottom: 0; left: 0; right: 0;
-	background-color: goldenrod;
-	clip-path: polygon(50% 0, 93.3% 25%, 93.3% 75%, 50% 100%, 6.7% 75%, 6.7% 25%);
-	transform: scale(1.077);
-	transition: transform 0.3s;
+.gallery-item::before {
+    /* Goldenrod outline on the hexagon */
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgb(40, 202, 40);
+    clip-path: polygon(50% 0, 93.3% 25%, 93.3% 75%, 50% 100%, 6.7% 75%, 6.7% 25%);
+    transform: scale(1.077);
+    transition: transform 0.3s;
 }
+
 .gallery-item:hover::before {
-	transform: scale(1.154);
+    transform: scale(1.154);
 }
+
 /* CSS Helpers */
 
 /* Lists */
@@ -223,24 +230,62 @@ header input:checked+nav {
 /* Media Rules */
 
 @media (min-width: 17rem) {
-    .main-gallery.clean-list{
+    .main-gallery.clean-list {
         max-width: 20rem;
         grid-template-columns: repeat(4, 5rem);
         grid-auto-rows: 160px;
     }
-    .gallery-item:nth-child(3n) {grid-column: 2/ span 2}
+
+    .gallery-item {
+        grid-column: span 2
+    }
+
+    .gallery-item:nth-child(3n) {
+        grid-column: 2/4
+    }
 }
 
 @media (min-width: 32rem) {
-    .main-gallery.clean-list{
+    .main-gallery.clean-list {
         max-width: 30rem;
         grid-template-columns: repeat(6, 5rem);
     }
+
     .gallery-item:nth-child(3n) {
-        grid-column: unset;
         grid-column: span 2;
     }
 
-    /* .gallery-item:nth-child(4n) {grid-column: 2/ span 2;}
-    .gallery-item:nth-child(4n+1) {grid-column: 4/ span 2;} */
+    .gallery-item:nth-child(5n-1) {
+        grid-column: 2/4;
+    }
+}
+
+@media (min-width: 42rem) {
+    .main-gallery.clean-list {
+        max-width: 40rem;
+        grid-template-columns: repeat(8, 5rem);
+    }
+
+    .gallery-item:nth-child(5n-1) {
+        grid-column: span 2;
+    }
+
+    .gallery-item:nth-child(7n-2) {
+        grid-column: 2/4;
+    }
+}
+
+@media (min-width: 54rem) {
+    .main-gallery.clean-list {
+        max-width: 50rem;
+        grid-template-columns: repeat(10, 5rem);
+    }
+
+    .gallery-item:nth-child(7n-2) {
+        grid-column: span 2;
+    }
+
+    .gallery-item:nth-child(9n-3) {
+        grid-column: 2/4;
+    }
 }

@@ -1,0 +1,79 @@
+/* CSS Style Fonts */
+
+@font-face {
+    font-family: Lato;
+    src: url(../css/Fonts/Lato/Lato-Regular.ttf);
+}
+
+@font-face {
+    font-family: Eurofurence;
+    src: url(../css/Fonts/Eurofurence/eurof55.ttf);
+}
+
+/* CSS Style Fonts */
+
+/* CSS Base Settings */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+}
+
+h1 {
+    font-family: 'Eurofurence', sans-serif;
+}
+
+button {
+    padding: 0;
+    margin: 0;
+    border: 0;
+    font-size: 1em;
+}
+
+/* CSS Base Settings */
+
+/* CSS Helpers */
+
+/* Lists */
+.clean-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+/* Lists */
+
+
+
+/* Flex */
+
+.flex {
+    display: flex;
+}
+
+.flex-1 {
+    flex: 1;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.align-center {
+    align-items: center;
+}
+
+.space-between {
+    justify-content: space-between;
+}
+
+.space-around {
+    justify-content: space-around;
+}
+
+/* Flex */
+
+
+/* CSS Helpers */

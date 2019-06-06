@@ -44,17 +44,9 @@ function onImagePick(imgPath) {
     drawImage(imgPath)
 }
 
-function onToggleTextBorder() {
-    let elBorderBtn = document.querySelector('.font-border-btn');
-    let meme = getMemeProp()
-    if (meme.textBorder === 'none') {
-        changeBorder('border')
-        elBorderBtn.innerText = 'Remove Font Border';
-    } else {
-        changeBorder('none')
-        elBorderBtn.innerText = 'Font Border'
-    }
-
+function onChangeTextBorderColor() {
+    let elBorderColor = document.querySelector('.border-color-change').value
+    changeTextBorderColor(elBorderColor)
 }
 
 //------------------------------------------------
@@ -79,7 +71,6 @@ function drawImage(imgPath) {
 
 function onDrawText(ev) {
     let { offsetX, offsetY } = ev;
-
     drawText(offsetX, offsetY)
 }
 
@@ -89,7 +80,7 @@ function drawText(x, y) {
     //font style
     //to do - add input border color
     gCtx.fillStyle = meme.fontColor;
-    if (meme.textBorder !== 'none') gCtx.strokeStyle = meme.textBorder;
+    gCtx.strokeStyle = meme.textBorderColor;
     gCtx.font = meme.fontSize + 'px ' + meme.fontFamily;
 
     //center the text
@@ -107,7 +98,11 @@ function drawText(x, y) {
 
 //-----------------------------------------------
 
+
 function downloadImg(elLink) {
-    var imgContent = gCanvas.toDataURL('image/jpeg');
-    elLink.href = imgContent
+    let data = gCanvas.toDataURL()
+    elLink.href = data
+   
+    elLink.download = 'YourMeme.jpg'
+
 }

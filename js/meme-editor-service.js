@@ -8,13 +8,27 @@ let gMeme = {
     fontFamily: 'eurofurence',
     fontStyle: 'none',
     textLocation: {x:'0', y:'0'},
-    textBorder: 'none',
+    textBorderColor: 'rgb(0, 0, 0,0)',
 }
 
 let gImgs = [
     createImgTemplate()
 ];
 
+
+// function createMeme() {
+//     var meme = {
+//         image: 'imgs/004.jpg',
+//         text: 'text',
+//         fontSize: '16',
+//         fontColor: 'rgb(0, 0, 0)',
+//         fontFamily: 'eurofurence',
+//         fontStyle: 'none',
+//         textLocation: {x:'0', y:'0'},
+//         textBorderColor: 'rgb(0, 0, 0,0)',
+//     }
+//     gMeme.push(meme)
+// }
 
 function createMeme(){
     var meme = {
@@ -26,6 +40,7 @@ function createMeme(){
         fontStyle: 'none',
         textLocation: {x:'0', y:'0'},
         textBorder: 'none',
+        
     }
     return meme;
 }
@@ -45,6 +60,7 @@ function createImgTemplate(image) {
     }
 }
 
+//-----------------------------------------------
 
 //FUNCTION - USER EDIT MEME 
 
@@ -74,9 +90,8 @@ function changeStyle(style) {
     gMeme.fontStyle = style;
 }
 
-function changeBorder(border) {
-    gMeme.textBorder = border;
-    console.log(gMeme)
+function changeTextBorderColor(borderColor) {
+    gMeme.textBorderColor = borderColor;
 }
 
 function getMemeProp(){
@@ -92,7 +107,7 @@ function changeImage(imgPath){
 //FUNCTION - RENDER CAVAS
 
 function setTextPosition(x, y, width, height) {
-    let textPosition = {
+    let textLocation = {
         leftUp: { x: x, y: y + height },
         leftDown: {x: x, y: y},
         rightUp: {x: x + width, y: y + height},

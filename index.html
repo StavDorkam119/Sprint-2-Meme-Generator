@@ -41,7 +41,7 @@
                         <img src="imgs/004.jpg" />
                     </a>
                 </li>
-                <li class="gallery-item"><a><img src="imgs/005.jpg" /></a></li>
+                <li class="gallery-item"><a><img onclick="drawImage('imgs/005.jpg')"src="imgs/005.jpg" /></a></li>
                 <li class="gallery-item"><a><img src="imgs/12.jpg" /></a></li>
                 <li class="gallery-item"><a><img src="imgs/Ancient-Aliens.jpg" /></a></li>
                 <li class="gallery-item"><a><img src="imgs/004.jpg" /></a></li>
@@ -51,7 +51,7 @@
             </ul>
 
         <section class="meme-editor-canvas container">
-            <canvas onclick="renderCanvas('img/2.jpeg')" id="meme-canvas" width="300" height="300">
+            <canvas onclick="onDrawText(event)" id="meme-canvas" width="300" height="300">
                     
             </canvas>
             <div class="meme-editor container">

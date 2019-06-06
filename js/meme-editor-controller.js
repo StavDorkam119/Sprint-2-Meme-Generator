@@ -61,7 +61,6 @@ function clearCanvas() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
 
-// function onAddText
 
 function drawImage(imgPath) {
     var img = new Image();
@@ -73,14 +72,19 @@ function drawImage(imgPath) {
 }
 
 
-// function onDrawText(ev){
-//     ev
-// }
+function onDrawText(ev){
+    let offsetX = ev.offsetX;
+    let offsetY = ev.offsetY;
+
+    drawText(offsetX,offsetY)
+}
+
+
 function drawText(x,y) {
     var meme = getMemeProp()
     ctx.font = `${meme.fontSize}px,${meme.fontFamily}`;
-    ctx.fillText(`${meme.text}, ${meme.fontSize}px, auto`);
-
+    ctx.fillText(`'${meme.text}'`, x,y);
+    ctx.strokeText(`'${meme.text}'`,x,y)
 }
 
 

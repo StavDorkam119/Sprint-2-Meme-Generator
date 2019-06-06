@@ -1,11 +1,11 @@
 'use strict'
 
-var canvas;
-var ctx;
+const gCanvas;
+const gCtx;
 
 function init() {
-    canvas = document.getElementById('meme-canvas');
-    ctx = canvas.getContext('2d');
+    gCanvas = document.getElementById('meme-canvas');
+    gCtx = gCanvas.getContext('2d');
 } 
 
 //-----------------------------------------------
@@ -63,9 +63,9 @@ function onToggleTextBorder(){
 
 
 function clearCanvas() {
-    ctx.fillStyle = 'white';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    gCtx.fillStyle = 'white';
+    gCtx.fillRect(0, 0, gCanvas.width, gCanvas.height);
+    gCtx.clearRect(0, 0, gCanvas.width, gCanvas.height);
 }
 
 function drawImage(imgPath) {
@@ -73,7 +73,7 @@ function drawImage(imgPath) {
     img.src = imgPath;
 
     img.onload = function () {
-        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        gCtx.drawImage(img, 0, 0, gCanvas.width, gCanvas.height);
     };
 }
 
@@ -89,20 +89,33 @@ function onDrawText(ev){
 
 function drawText(x,y) {
     var meme = getMemeProp()
+<<<<<<< HEAD
     ctx.fillStyle = meme.fontColor;
+=======
+<<<<<<< HEAD
+    gCtx.font = `${meme.fontSize}px,${meme.fontFamily}`;
+    gCtx.fillText(`'${meme.text}'`, x,y);
+    gCtx.strokeText(`'${meme.text}'`,x,y)
+=======
+    ctx.fillStyle = `${meme.fontColor}`;
+>>>>>>> de73961202e31682818c80cc1a7de204e105633d
     if (meme.textBorder !=='none') ctx.strokeStyle = `${meme.textBorder}`
     ctx.textAlign ='center';
     ctx.textBaseline = "middle";
     ctx.font = `${meme.fontSize}px ${meme.fontFamily}`;
     ctx.fillText(`${meme.text}`, x,y);
     ctx.strokeText(`${meme.text}`,x,y)
+<<<<<<< HEAD
     console.log(ctx.measureText(meme.text).width)
+=======
+>>>>>>> 358c21949f457385c1e999d4f09e22e0c168bb98
+>>>>>>> de73961202e31682818c80cc1a7de204e105633d
 }
 
 
 //-----------------------------------------------
 
 function downloadImg(elLink) {
-    var imgContent = canvas.toDataURL('image/jpeg');
+    var imgContent = gCanvas.toDataURL('image/jpeg');
     elLink.href = imgContent
 }

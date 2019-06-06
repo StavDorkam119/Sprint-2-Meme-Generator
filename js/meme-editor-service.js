@@ -11,6 +11,13 @@ let gMeme = {
     textBorder: 'none',
 }
 
+<<<<<<< HEAD
+let gImgs = [
+    createImgTemplate()
+];
+
+
+=======
 function createMeme(){
     var meme = {
         image: 'imgs/004.jpg',
@@ -24,7 +31,23 @@ function createMeme(){
     }
     return meme;
 }
+>>>>>>> 358c21949f457385c1e999d4f09e22e0c168bb98
 //-----------------------------------------------
+
+function createImgTemplate(image) {
+    return  {
+        id: makeId(),
+        image: '01',
+        text: 'text',
+        fontSize: '16',
+        fontColor: 'rgb(0, 0, 0)',
+        fontFamily: 'eurofurence',
+        fontStyle: 'none',
+        textLocation: {x:'0', y:'0'},
+        textBorder: 'none',
+    }
+}
+
 
 //FUNCTION - USER EDIT MEME 
 

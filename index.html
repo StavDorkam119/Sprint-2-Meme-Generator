@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,24 +9,35 @@
     <script src="https://kit.fontawesome.com/fc31d14bf1.js"></script>
     <title>Meme Generator</title>
 </head>
+
 <body>
 
     <header class="flex space-around align-center">
-        <h1>Meme Generator</h1>
         <label for="menu-checklist" class="nav-menu-toggle-label"><i class="fas fa-bars"></i></label>
         <input id="menu-checklist" type="checkbox" name="checklist">
         <nav>
             <ul class="clean-list nav-menu">
-                <li class="list-item">Image Gallery</li>
-                <li class="list-item">Meme Editor</li>
+                <li class="list-item flex align-center">
+                    <a href="#" class="flex justify-center align-center">
+                        <div>Image Gallery</div>
+                    </a>
+                </li>
+
+                <li class="list-item">
+                    <a href="#" class="flex justify-center align-center">
+                        <div>Meme Editor</div>
+                    </a>
+                </li>
             </ul>
         </nav>
+        <h1>Meme Generator</h1>
+
     </header>
 
     <main>
         <section class="main-gallery">
             <ul class="clean-list">
-                <li><a><img src="imgs/004.jpg"/></a></li>
+                <li><a><img src="imgs/004.jpg" /></a></li>
             </ul>
         </section>
 
@@ -39,4 +51,5 @@
         </section>
     </main>
 </body>
+
 </html>

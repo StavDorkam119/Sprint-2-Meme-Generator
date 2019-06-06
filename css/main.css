@@ -94,7 +94,9 @@ header input:checked + nav{
     border-top: 1px solid magenta;
 }
 
-
+#meme-canvas {
+    border: 1px solid black;
+}
 
 .nav-menu-toggle-label i::before {
     font-size: 2em;

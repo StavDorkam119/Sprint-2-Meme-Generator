@@ -31,12 +31,28 @@
 
         <section class="meme-editor-canvas container">
             <canvas id="meme-canvas" width="300" height="300">
-
+        
             </canvas>
             <div class="meme-editor container">
+                <div class="image-change">Change Image</div>
+                <div class="font-size-div">
+                    Font Size: <input onchange=" onChangeFontSize()" class="font-size-change" type="number" min="10">
+                </div>
+                <div class="font-color-div">
+                    Change Color: <input onchange="onChangeColor()" type="color" class="font-color-change">
+                </div>
+                <div class="change-font-div">
+                    <select>
+                        <option value="font-ariel">Ariel</option>
+                        <option value="font-tahoma">Tahoma</option>
 
+                    </select>
+                </div>
             </div>
         </section>
     </main>
+    <script src="js/util.js"></script>
+    <script src="js/meme-editor-controller.js"></script>
+    <script src="js/meme-editor-service.js"></script>
 </body>
 </html>

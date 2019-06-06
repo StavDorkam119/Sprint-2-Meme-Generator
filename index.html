@@ -36,6 +36,13 @@
 
     <main>
             <ul class="clean-list main-gallery">
+                <li class="gallery-item">
+                    <a>
+                        <img src="imgs/004.jpg" />
+                    </a>
+                </li>
+                <li class="gallery-item"><a><img onclick="drawImage('imgs/005.jpg')"src="imgs/005.jpg" /></a></li>
+                <li class="gallery-item"><a><img onclick="drawImage('imgs/12.jpg')" src="imgs/12.jpg" /></a></li>
                 <li class="gallery-item"><a><img src="imgs/004.jpg" /></a></li>
                 <li class="gallery-item"><a><img src="imgs/005.jpg" /></a></li>
                 <li class="gallery-item"><a><img src="imgs/12.jpg" /></a></li>
@@ -71,13 +78,13 @@
                 </div>
                 <div class="text-add-div">
                     <label for="text-add">Write Meme</label>
-                    <input class="text-add" type="text">
+                    <input onchange="onChangeText()" class="text-add" type="text">
                 </div>
                 <div class="font-size-div">
                     Change Font Size: <input onchange=" onChangeFontSize()" class="font-size-change" type="number" min="10">
                 </div>
                 <div class="font-color-div">
-                    Change Color: <input onchange="onChangeColor()" type="color" class="font-color-change">
+                    Change Font Color: <input onchange="onChangeColor()" type="color" class="font-color-change">
                 </div>
                 <div class="change-font-div">
                     Change Font:
@@ -94,7 +101,6 @@
                     <button onclick="onChangeStyle('uppercase')" class="style-uppercase">Upper Case</button>
                 </div>
                 <div class="font-border">
-                    Font Wide:
                     <button onclick="onToggleTextBorder()" class="font-border-btn">Font Border</button>
                 </div>
 

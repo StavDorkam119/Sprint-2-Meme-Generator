@@ -16,8 +16,9 @@ function onChooseImage(img){
     changeImage(img)
 }
 
-function onChangeText(str){
-    changeText(str)
+function onChangeText(){
+    const elText = document.querySelector('.text-add').value;
+    changeText(elText)
 }
 
 function onChangeFontSize() {
@@ -38,15 +39,20 @@ function onChangeStyle(style) {
     changeStyle(style)
 }
 
-function onToggleTextBorder(){
-    let elBorderBtn = document.querySelector('.font-border-btn').innerText;
+function onImagePick(imgPath) {
+    changeImage(imgPath)
+    drawImage(imgPath)
+}
 
-    if (elBorderBtn === 'Font Border'){
-        changeBorder('1px solid black')
-        elBorderBtn ='Remove Font Border';
+function onToggleTextBorder(){
+    let elBorderBtn = document.querySelector('.font-border-btn');
+    let meme = getMemeProp()
+    if (meme.textBorder === 'none'){
+        changeBorder('border')
+        elBorderBtn.innerText  ='Remove Font Border';
     } else {
         changeBorder('none')
-        elBorderBtn = 'Font Border'
+        elBorderBtn.innerText  = 'Font Border'
     }
     
 }
@@ -55,12 +61,12 @@ function onToggleTextBorder(){
 
 //FUNCTION - RENDER CAVAS
 
+
 function clearCanvas() {
     gCtx.fillStyle = 'white';
     gCtx.fillRect(0, 0, gCanvas.width, gCanvas.height);
     gCtx.clearRect(0, 0, gCanvas.width, gCanvas.height);
 }
-
 
 function drawImage(imgPath) {
     var img = new Image();
@@ -71,22 +77,30 @@ function drawImage(imgPath) {
     };
 }
 
-
 function onDrawText(ev){
-    let offsetX = ev.offsetX;
-    let offsetY = ev.offsetY;
-
+    let {offsetX, offsetY} = ev;
+    // let offsetY = ev.offsetY;
+    // offsetX = offsetX*1.5;
+    // offsetY = offsetY*1.5;
     drawText(offsetX,offsetY)
 }
 
-
 function drawText(x,y) {
     var meme = getMemeProp()
+<<<<<<< HEAD
     gCtx.font = `${meme.fontSize}px,${meme.fontFamily}`;
     gCtx.fillText(`'${meme.text}'`, x,y);
     gCtx.strokeText(`'${meme.text}'`,x,y)
+=======
+    ctx.fillStyle = `${meme.fontColor}`;
+    if (meme.textBorder !=='none') ctx.strokeStyle = `${meme.textBorder}`
+    ctx.textAlign ='center';
+    ctx.textBaseline = "middle";
+    ctx.font = `${meme.fontSize}px ${meme.fontFamily}`;
+    ctx.fillText(`${meme.text}`, x,y);
+    ctx.strokeText(`${meme.text}`,x,y)
+>>>>>>> 358c21949f457385c1e999d4f09e22e0c168bb98
 }
-
 
 
 //-----------------------------------------------

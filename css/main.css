@@ -23,6 +23,7 @@ body {
 }
 
 h1 {
+    margin: 0;
     font-family: 'Eurofurence', sans-serif;
 }
 
@@ -34,6 +35,27 @@ button {
 }
 
 /* CSS Base Settings */
+
+/* Header */
+header {
+    padding: 1em 0;
+    background-color: rgba(50, 50, 50, 0.9);
+    color: hotpink;
+}
+
+header input {
+    display: none;
+}
+
+.nav-menu-toggle-label i::before {
+    font-size: 2em;
+}
+
+header input:checked
+/* Header */
+
+
+
 
 /* CSS Helpers */
 

@@ -5,14 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.css">
+    <script src="https://kit.fontawesome.com/fc31d14bf1.js"></script>
     <title>Meme Generator</title>
 </head>
 <body>
-    <header class="flex">
+    <header class="flex space-around align-center">
         <h1>Meme Generator</h1>
-        <label for="menu-checklist"><i class="fas fa-bars"></i></label>
-        <input id="menu-checklist" type="checklist" name="checklist">
+        <label for="menu-checklist" class="nav-menu-toggle-label"><i class="fas fa-bars"></i></label>
+        <input id="menu-checklist" type="checkbox" name="checklist">
+        <nav>
+            <ul class="clean-list nav-menu">
+                <li class="list-item">Image Gallery</li>
+                <li class="list-item">Meme Editor</li>
+            </ul>
+        </nav>
     </header>
 </body>
 </html>

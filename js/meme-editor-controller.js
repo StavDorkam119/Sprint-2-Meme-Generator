@@ -16,9 +16,11 @@ function init() {
         gKeywords = getKeywordsData();
     }
     renderImageGallery();
+
+
     //Added Responsive Resizing to the Canvas:
     window.addEventListener('resize', setSizeOfCanvas);
-    
+    document.getElementById("keyword-search").addEventListener('input', onFilterGallery, event)
     setSizeOfCanvas();
     //Added event listener for drag and drop:
     // mouseHandle = {
@@ -158,4 +160,35 @@ function setSizeOfCanvas() {
         gCanvas.height = 600;
     }
 }
-    
+
+
+function onFilterGallery(event) {
+    //convert input str into a regex format
+
+    let inputStr = event.currentTarget.value;
+    if (!inputStr) {
+        renderImageGallery();
+        return;
+    }
+    if (inputStr[inputStr.length-1] === ' ') return;
+    inputStr = inputStr.split(' ');
+    inputStr.forEach((word, index, thisArray)=> {thisArray[index] = `(?=.*${word})`});
+    inputStr = '^' + inputStr.join(''); + '.*$';
+    let regex = new RegExp(inputStr, 'gi');
+    // debugger;
+    let filteredImgs = gImgs.filter(img => {
+        let imgKeywordsStr = img.keywords.join(' ');
+        return regex.test(imgKeywordsStr);
+    });
+    if (!filteredImgs || !filteredImgs.length) {
+        console.log('No images matched');
+        renderImageGallery();
+    }
+    let mainGallery = document.querySelector('.main-gallery');
+    let strHTML = filteredImgs.map(img => {
+        return `
+        <li class="gallery-item"><a><img onclick="drawImage('${img.imageUrl}')"src=${img.imageUrl} /></a></li>`
+    });
+    mainGallery.innerHTML = strHTML.join('');
+}
+

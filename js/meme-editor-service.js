@@ -1,7 +1,8 @@
 'use strict'
 
 let gImgs;
-
+let gKeywords;
+let gEditorSettings;
 
 let gMeme = {
     image: 'imgs/004.jpg',
@@ -14,28 +15,6 @@ let gMeme = {
     textBorderColor: 'rgb(0, 0, 0,0)',
 }
 
-<<<<<<< HEAD
-=======
-let gImgs = [
-    createImgTemplate()
-];
-
-
-// function createMeme() {
-//     var meme = {
-//         image: 'imgs/004.jpg',
-//         text: 'text',
-//         fontSize: '16',
-//         fontColor: 'rgb(0, 0, 0)',
-//         fontFamily: 'eurofurence',
-//         fontStyle: 'none',
-//         textLocation: {x:'0', y:'0'},
-//         textBorderColor: 'rgb(0, 0, 0,0)',
-//     }
-//     gMeme.push(meme)
-// }
-
->>>>>>> 312f119d5c8f72a1bfc4811de79a96528ee32b3a
 function createMeme(){
     var meme = {
         image: 'imgs/004.jpg',
@@ -61,7 +40,6 @@ function createImgTemplate(imageUrl, keywords) {
     }
 }
 
-<<<<<<< HEAD
 function gImgsDefault() {
     return [
         createImgTemplate('imgs/2.jpg', 'look no fucks fuck given sound music'),
@@ -79,15 +57,27 @@ function gImgsDefault() {
         createImgTemplate('imgs/One-Does-Not-Simply.jpg', 'lotr Lord of the Rings one does not simply walk into mordor Mordor'),
     ];
 }
-=======
-//-----------------------------------------------
->>>>>>> 312f119d5c8f72a1bfc4811de79a96528ee32b3a
+
+
+function getKeywordsData() {
+   return gImgs.reduce((acc, img) => {
+        img.keywords.forEach(keyword => {
+            if (!acc[keyword]) acc[keyword] = 1;
+            else acc[keyword]++;
+        });
+        return acc;
+    }, {});
+}
+// function editorDefaults () {
+//     return {
+
+//     }
+// }
 
 //FUNCTION - USER EDIT MEME 
 
 function changeImage(img) {
     gMeme.image = img;
-
 }
 
 function changeText(str) {

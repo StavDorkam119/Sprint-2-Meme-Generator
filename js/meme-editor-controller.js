@@ -2,6 +2,7 @@
 
 let gCanvas;
 let gCtx;
+let mouseHandle;
 
 function init() {
     gCanvas = document.getElementById('meme-canvas');
@@ -10,23 +11,25 @@ function init() {
     if (!gImgs || !gImgs.length) {
         gImgs = gImgsDefault();
     }
+    gKeywords = loadFromStorage('gKeywords');
+    if (!gKeywords) {
+        gKeywords = getKeywordsData();
+    }
     renderImageGallery();
     //Added Responsive Resizing to the Canvas:
-    window.addEventListener('resize', () => {
-        if (window.innerWidth <= 16*22) {
-            gCanvas.width = window.innerWidth - 50;
-            gCanvas.height = window.innerWidth - 50;
-        }
-        else if (window.innerWidth <= 16*32) {
-            gCanvas.width = 300;
-            gCanvas.height = 300;
-        } else if (window.innerWidth <= 16*42) {
-            gCanvas.width = 450;
-            gCanvas.height = 450;
-        } 
-    });
+    window.addEventListener('resize', setSizeOfCanvas);
+    
+    setSizeOfCanvas();
+    //Added event listener for drag and drop:
+    // mouseHandle = {
+    //     x: gCanvas.width/2,
+    //     y: gCanvas.height/2
+    // };
+
+    // util.
     //--------------------------------------------
     saveToStorage('gImgs', gImgs);
+    saveToStorage('gKeywords', gKeywords);
 } 
 
 //-----------------------------------------------
@@ -139,5 +142,20 @@ function renderImageGallery () {
     mainGallery.innerHTML = strHTML.join('');
 }
 
-
+function setSizeOfCanvas() {
+    if (window.innerWidth <= 16*22) {
+        gCanvas.width = window.innerWidth - 50;
+        gCanvas.height = window.innerWidth - 50;
+    }
+    else if (window.innerWidth <= 16*32) {
+        gCanvas.width = 300;
+        gCanvas.height = 300;
+    } else if (window.innerWidth >= 16*42 && window.innerWidth < 16*66) {
+        gCanvas.width = 450;
+        gCanvas.height = 450;
+    } else if (window.innerWidth >= 16*66) {
+        gCanvas.width = 600;
+        gCanvas.height = 600;
+    }
+}
     

@@ -1,11 +1,32 @@
 'use strict'
 
-const gCanvas;
-const gCtx;
+let gCanvas;
+let gCtx;
 
 function init() {
     gCanvas = document.getElementById('meme-canvas');
     gCtx = gCanvas.getContext('2d');
+    gImgs = loadFromStorage('gImgs');
+    if (!gImgs || !gImgs.length) {
+        gImgs = gImgsDefault();
+    }
+    renderImageGallery();
+    //Added Responsive Resizing to the Canvas:
+    window.addEventListener('resize', () => {
+        if (window.innerWidth <= 16*22) {
+            gCanvas.width = window.innerWidth - 50;
+            gCanvas.height = window.innerWidth - 50;
+        }
+        else if (window.innerWidth <= 16*32) {
+            gCanvas.width = 300;
+            gCanvas.height = 300;
+        } else if (window.innerWidth <= 16*42) {
+            gCanvas.width = 450;
+            gCanvas.height = 450;
+        } 
+    });
+    //--------------------------------------------
+    saveToStorage('gImgs', gImgs);
 } 
 
 //-----------------------------------------------
@@ -63,8 +84,6 @@ function onToggleTextBorder(){
 
 
 function clearCanvas() {
-    gCtx.fillStyle = 'white';
-    gCtx.fillRect(0, 0, gCanvas.width, gCanvas.height);
     gCtx.clearRect(0, 0, gCanvas.width, gCanvas.height);
 }
 
@@ -87,19 +106,13 @@ function onDrawText(ev){
 
 function drawText(x,y) {
     var meme = getMemeProp()
-<<<<<<< HEAD
-    gCtx.font = `${meme.fontSize}px,${meme.fontFamily}`;
-    gCtx.fillText(`'${meme.text}'`, x,y);
-    gCtx.strokeText(`'${meme.text}'`,x,y)
-=======
-    ctx.fillStyle = `${meme.fontColor}`;
-    if (meme.textBorder !=='none') ctx.strokeStyle = `${meme.textBorder}`
-    ctx.textAlign ='center';
-    ctx.textBaseline = "middle";
-    ctx.font = `${meme.fontSize}px ${meme.fontFamily}`;
-    ctx.fillText(`${meme.text}`, x,y);
-    ctx.strokeText(`${meme.text}`,x,y)
->>>>>>> 358c21949f457385c1e999d4f09e22e0c168bb98
+    gCtx.fillStyle = `${meme.fontColor}`;
+    if (meme.textBorder !=='none') gCtx.strokeStyle = `${meme.textBorder}`
+    gCtx.textAlign ='center';
+    gCtx.textBaseline = "middle";
+    gCtx.font = `${meme.fontSize}px ${meme.fontFamily}`;
+    gCtx.fillText(`${meme.text}`, x,y);
+    gCtx.strokeText(`${meme.text}`,x,y)
 }
 
 
@@ -109,3 +122,16 @@ function downloadImg(elLink) {
     var imgContent = gCanvas.toDataURL('image/jpeg');
     elLink.href = imgContent
 }
+
+//FUNCTION: Render Image Gallery 
+
+function renderImageGallery () {
+    let mainGallery = document.querySelector('.main-gallery');
+    let strHTML = gImgs.map(img => {
+        return `
+        <li class="gallery-item"><a><img onclick="drawImage('${img.imageUrl}')"src=${img.imageUrl} /></a></li>`
+    });
+    mainGallery.innerHTML = strHTML.join('');
+}
+
+

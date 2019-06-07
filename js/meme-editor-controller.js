@@ -33,11 +33,11 @@ function init() {
 
 //FUNCTION - USER EDIT MEME 
 
-function onChooseImage(img){
+function onChooseImage(img) {
     changeImage(img)
 }
 
-function onChangeText(){
+function onChangeText() {
     const elText = document.querySelector('.text-add').value;
     changeText(elText)
 }
@@ -48,11 +48,11 @@ function onChangeFontSize() {
 }
 
 function onChangeColor() {
-    const elColor = document.querySelector('.font-color-change').value;   
+    const elColor = document.querySelector('.font-color-change').value;
     changeColor(elColor)
 }
 
-function onChangeFont(elFont){
+function onChangeFont(elFont) {
     changeFont(elFont)
 }
 
@@ -65,17 +65,9 @@ function onImagePick(imgPath) {
     drawImage(imgPath)
 }
 
-function onToggleTextBorder(){
-    let elBorderBtn = document.querySelector('.font-border-btn');
-    let meme = getMemeProp()
-    if (meme.textBorder === 'none'){
-        changeBorder('border')
-        elBorderBtn.innerText  ='Remove Font Border';
-    } else {
-        changeBorder('none')
-        elBorderBtn.innerText  = 'Font Border'
-    }
-    
+function onChangeTextBorderColor() {
+    let elBorderColor = document.querySelector('.border-color-change').value
+    changeTextBorderColor(elBorderColor)
 }
 
 //------------------------------------------------
@@ -96,32 +88,45 @@ function drawImage(imgPath) {
     };
 }
 
-function onDrawText(ev){
-    let {offsetX, offsetY} = ev;
-    // let offsetY = ev.offsetY;
-    // offsetX = offsetX*1.5;
-    // offsetY = offsetY*1.5;
-    drawText(offsetX,offsetY)
+function onDrawText(ev) {
+    let { offsetX, offsetY } = ev;
+    drawText(offsetX, offsetY)
 }
 
-function drawText(x,y) {
+function drawText(x, y) {
     var meme = getMemeProp()
-    gCtx.fillStyle = `${meme.fontColor}`;
-    if (meme.textBorder !=='none') gCtx.strokeStyle = `${meme.textBorder}`
+
+    //font style
+    //to do - add input border color
+    gCtx.fillStyle = meme.fontColor;
+    gCtx.strokeStyle = meme.textBorderColor;
+    gCtx.font = meme.fontSize + 'px ' + meme.fontFamily;
+
+    //center the text
     gCtx.textAlign ='center';
     gCtx.textBaseline = "middle";
-    gCtx.font = `${meme.fontSize}px ${meme.fontFamily}`;
-    gCtx.fillText(`${meme.text}`, x,y);
-    gCtx.strokeText(`${meme.text}`,x,y)
+
+    //print the text on canvas
+    gCtx.fillText(meme.text, x, y);
+    gCtx.strokeText(meme.text, x, y)
+
+    let textWidth = gCtx.measureText(meme.text).width;
+    setTextPosition(x, y, textWidth, parseInt(meme.fontSize))
 }
 
 
 //-----------------------------------------------
 
+
 function downloadImg(elLink) {
     var imgContent = gCanvas.toDataURL('image/jpeg');
-    elLink.href = imgContent
+    let data = gCanvas.toDataURL()
+    elLink.href = data
+   
+    elLink.download = 'YourMeme.jpg'
+
 }
+
 
 //FUNCTION: Render Image Gallery 
 
@@ -135,3 +140,4 @@ function renderImageGallery () {
 }
 
 
+    

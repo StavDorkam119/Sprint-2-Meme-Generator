@@ -11,9 +11,31 @@ let gMeme = {
     fontFamily: 'eurofurence',
     fontStyle: 'none',
     textLocation: {x:'0', y:'0'},
-    textBorder: 'none',
+    textBorderColor: 'rgb(0, 0, 0,0)',
 }
 
+<<<<<<< HEAD
+=======
+let gImgs = [
+    createImgTemplate()
+];
+
+
+// function createMeme() {
+//     var meme = {
+//         image: 'imgs/004.jpg',
+//         text: 'text',
+//         fontSize: '16',
+//         fontColor: 'rgb(0, 0, 0)',
+//         fontFamily: 'eurofurence',
+//         fontStyle: 'none',
+//         textLocation: {x:'0', y:'0'},
+//         textBorderColor: 'rgb(0, 0, 0,0)',
+//     }
+//     gMeme.push(meme)
+// }
+
+>>>>>>> 312f119d5c8f72a1bfc4811de79a96528ee32b3a
 function createMeme(){
     var meme = {
         image: 'imgs/004.jpg',
@@ -24,6 +46,7 @@ function createMeme(){
         fontStyle: 'none',
         textLocation: {x:'0', y:'0'},
         textBorder: 'none',
+        
     }
     return meme;
 }
@@ -38,6 +61,7 @@ function createImgTemplate(imageUrl, keywords) {
     }
 }
 
+<<<<<<< HEAD
 function gImgsDefault() {
     return [
         createImgTemplate('imgs/2.jpg', 'look no fucks fuck given sound music'),
@@ -55,6 +79,9 @@ function gImgsDefault() {
         createImgTemplate('imgs/One-Does-Not-Simply.jpg', 'lotr Lord of the Rings one does not simply walk into mordor Mordor'),
     ];
 }
+=======
+//-----------------------------------------------
+>>>>>>> 312f119d5c8f72a1bfc4811de79a96528ee32b3a
 
 //FUNCTION - USER EDIT MEME 
 
@@ -84,9 +111,8 @@ function changeStyle(style) {
     gMeme.fontStyle = style;
 }
 
-function changeBorder(border) {
-    gMeme.textBorder = border;
-    console.log(gMeme)
+function changeTextBorderColor(borderColor) {
+    gMeme.textBorderColor = borderColor;
 }
 
 function getMemeProp(){
@@ -101,3 +127,12 @@ function changeImage(imgPath){
 
 //FUNCTION - RENDER CAVAS
 
+function setTextPosition(x, y, width, height) {
+    let textLocation = {
+        leftUp: { x: x, y: y + height },
+        leftDown: {x: x, y: y},
+        rightUp: {x: x + width, y: y + height},
+        rightDown: {x: x+width, y: y}
+    }
+    
+}

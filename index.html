@@ -67,24 +67,34 @@
 
         <section class="meme-editor-canvas container flex flex-column align-center">
             <canvas onclick="onDrawText(event)" id="meme-canvas" width="300" height="300">
-                    
+        
             </canvas>
             <div class="meme-editor container">
                 <div class="clear-canvas">
                     <button class="clear-canvas-btn" onclick="clearCanvas()">Clear Canvas</button>
                 </div>
                 <div class="image-change">
-                    Change Image
+                    <a href="#">
+                        Change Image
+                    </a>
                 </div>
                 <div class="text-add-div">
-                    <label for="text-add">Write Meme</label>
-                    <input onchange="onChangeText()" class="text-add" type="text">
+                    <label for="text-add">
+                        Write Meme
+                    </label>
+                    <input type="text" class="text-add" onkeyup="onChangeText()">
                 </div>
                 <div class="font-size-div">
-                    Change Font Size: <input onchange=" onChangeFontSize()" class="font-size-change" type="number" min="10">
+                    Change Font Size: 
+                    <input type="number" class="font-size-change" onchange="onChangeFontSize()" min="10">
                 </div>
                 <div class="font-color-div">
-                    Change Font Color: <input onchange="onChangeColor()" type="color" class="font-color-change">
+                    Change Font Color: 
+                    <input type="color" class="font-color-change" onchange="onChangeColor()">
+                </div>
+                <div class="font-color-div">
+                    Change Font Border Color: 
+                    <input type="color" class="border-color-change" onchange="onChangeTextBorderColor()">
                 </div>
                 <div class="change-font-div">
                     Change Font:
@@ -95,7 +105,7 @@
                     </select>
                 </div>
                 <div class="font-style">
-                    Change Font Style: 
+                    Change Font Style:
                     <button onclick="onChangeStyle('bold')" class="style-bold">Bold</button>
                     <button onclick="onChangeStyle('italic')" class="style-italic">Italic</button>
                     <button onclick="onChangeStyle('uppercase')" class="style-uppercase">Upper Case</button>
@@ -103,7 +113,10 @@
                 <div class="font-border">
                     <button onclick="onToggleTextBorder()" class="font-border-btn">Font Border</button>
                 </div>
-
+                <div class="download-meme">
+                        <a class="download-link" href="#" onclick="downloadImg(this)" download="">Download</a>
+                </div>
+        
             </div>
         </section>
     </main>

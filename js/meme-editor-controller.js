@@ -36,13 +36,17 @@ function init() {
 
 //FUNCTION - USER EDIT MEME 
 
-function onChooseImage(img) {
-    changeImage(img)
-}
-
-function onChangeText() {
+function onWriteText(){
     const elText = document.querySelector('.text-add').value;
-    changeText(elText)
+    changeText(elText);
+    clearCanvas()
+
+    let meme = getMemeProp()
+    let memeImg = meme[0].selectedImgId;
+    drawImage(memeImg);
+    changeText(elText);
+    drawText(gCanvas.width/2, gCanvas.height/2)
+
 }
 
 function onChangeFontSize() {
@@ -57,10 +61,6 @@ function onChangeColor() {
 
 function onChangeFont(elFont) {
     changeFont(elFont)
-}
-
-function onChangeStyle(style) {
-    changeStyle(style)
 }
 
 function onImagePick(imgPath) {
@@ -85,10 +85,7 @@ function clearCanvas() {
 function drawImage(imgPath) {
     var img = new Image();
     img.src = imgPath;
-
-    img.onload = function () {
-        gCtx.drawImage(img, 0, 0, gCanvas.width, gCanvas.height);
-    };
+    gCtx.drawImage(img, 0, 0, gCanvas.width, gCanvas.height);
 }
 
 function onDrawText(ev) {
@@ -97,10 +94,10 @@ function onDrawText(ev) {
 }
 
 function drawText(x, y) {
-    var meme = getMemeProp()
+    let meme = getMemeProp()    
+    meme = meme[0].txts[meme[1]];
 
     //font style
-    //to do - add input border color
     gCtx.fillStyle = meme.fontColor;
     gCtx.strokeStyle = meme.textBorderColor;
     gCtx.font = meme.fontSize + 'px ' + meme.fontFamily;
@@ -122,7 +119,7 @@ function drawText(x, y) {
 
 
 function downloadImg(elLink) {
-    var imgContent = gCanvas.toDataURL('image/jpeg');
+    // var imgContent = gCanvas.toDataURL('image/jpeg');
     let data = gCanvas.toDataURL()
     elLink.href = data
    
@@ -137,7 +134,7 @@ function renderImageGallery () {
     let mainGallery = document.querySelector('.main-gallery');
     let strHTML = gImgs.map(img => {
         return `
-        <li class="gallery-item"><a><img onclick="drawImage('${img.imageUrl}')"src=${img.imageUrl} /></a></li>`
+        <li class="gallery-item"><a><img onclick="onImagePick('${img.imageUrl}')"src=${img.imageUrl} /></a></li>`
     });
     mainGallery.innerHTML = strHTML.join('');
 }

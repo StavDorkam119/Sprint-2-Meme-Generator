@@ -3,32 +3,34 @@
 let gImgs;
 let gKeywords;
 let gEditorSettings;
+//the current word, the user edit 
+let gCurrWord = 0;
 
 let gMeme = {
-    image: 'imgs/004.jpg',
-    text: 'text',
-    fontSize: '16',
-    fontColor: 'rgb(0, 0, 0)',
-    fontFamily: 'eurofurence',
-    fontStyle: 'none',
-    textLocation: {x:'0', y:'0'},
-    textBorderColor: 'rgb(0, 0, 0,0)',
-}
-
-function createMeme(){
-    var meme = {
-        image: 'imgs/004.jpg',
-        text: 'text',
+    selectedImgId: 0,
+    txts: [{
+        text: '',
         fontSize: '16',
         fontColor: 'rgb(0, 0, 0)',
         fontFamily: 'eurofurence',
-        fontStyle: 'none',
         textLocation: {x:'0', y:'0'},
-        textBorder: 'none',
-        
-    }
-    return meme;
+        textBorderColor: 'rgb(0, 0, 0,0)', 
+    }]
 }
+// function createMeme(){
+//     var meme = {
+//         image: 'imgs/004.jpg',
+//         text: 'text',
+//         fontSize: '16',
+//         fontColor: 'rgb(0, 0, 0)',
+//         fontFamily: 'eurofurence',
+//         fontStyle: 'none',
+//         textLocation: {x:'0', y:'0'},
+//         textBorderColor: 'rgb(0, 0, 0,0)',
+        
+//     }
+//     return meme;
+// }
 //-----------------------------------------------
 
 function createImgTemplate(imageUrl, keywords) {
@@ -77,41 +79,33 @@ function getKeywordsData() {
 //FUNCTION - USER EDIT MEME 
 
 function changeImage(img) {
-    gMeme.image = img;
+    gMeme.selectedImgId = img;
 }
 
 function changeText(str) {
-    gMeme.text = str;
+    gMeme.txts[gCurrWord].text = str;
 }
 
 function changeFontSize(size){
-    gMeme.fontSize = size;
-
+    gMeme.txts[gCurrWord].fontSize = size;
 }
 
 function changeColor(color){ 
-    gMeme.fontColor = color;
+    gMeme.txts[gCurrWord].fontColor = color;    
 }
 
 function changeFont(font) {
-    gMeme.fontFamily = font;
-}
-
-function changeStyle(style) {
-    gMeme.fontStyle = style;
+    gMeme.txts[gCurrWord].fontFamily = font;
 }
 
 function changeTextBorderColor(borderColor) {
-    gMeme.textBorderColor = borderColor;
+    gMeme.txts[gCurrWord].textBorderColor = borderColor;   
 }
 
 function getMemeProp(){
-    return gMeme;
+    return [gMeme,gCurrWord];
 }
 
-function changeImage(imgPath){
-    gMeme.image = imgPath;
-}
 
 //------------------------------------------------
 
@@ -123,6 +117,5 @@ function setTextPosition(x, y, width, height) {
         leftDown: {x: x, y: y},
         rightUp: {x: x + width, y: y + height},
         rightDown: {x: x+width, y: y}
-    }
-    
+    }   
 }

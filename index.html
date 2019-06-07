@@ -47,9 +47,6 @@
         
             </canvas>
             <div class="meme-editor container">
-                <div class="clear-canvas">
-                    <button class="clear-canvas-btn" onclick="clearCanvas()">Clear Canvas</button>
-                </div>
                 <div class="image-change">
                     <a href="#">
                         Change Image
@@ -59,7 +56,7 @@
                     <label for="text-add">
                         Write Meme
                     </label>
-                    <input type="text" class="text-add" onkeyup="onChangeText()">
+                    <input type="text" class="text-add" onkeyup="onWriteText()">
                 </div>
                 <div class="font-size-div">
                     Change Font Size: 
@@ -81,14 +78,8 @@
                         <option value="tahoma">Tahoma</option>
                     </select>
                 </div>
-                <div class="font-style">
-                    Change Font Style:
-                    <button onclick="onChangeStyle('bold')" class="style-bold">Bold</button>
-                    <button onclick="onChangeStyle('italic')" class="style-italic">Italic</button>
-                    <button onclick="onChangeStyle('uppercase')" class="style-uppercase">Upper Case</button>
-                </div>
-                <div class="font-border">
-                    <button onclick="onToggleTextBorder()" class="font-border-btn">Font Border</button>
+                <div class="clear-canvas">
+                    <button class="clear-canvas-btn" onclick="clearCanvas()">Clear Meme Editor</button>
                 </div>
                 <div class="download-meme">
                         <a class="download-link" href="#" onclick="downloadImg(this)" download="">Download</a>

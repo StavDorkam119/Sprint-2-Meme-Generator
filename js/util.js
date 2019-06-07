@@ -27,3 +27,10 @@ function makeId() {
 
     return txt;
 }
+
+function findImgByIndex(id){
+    var image = gImgs.find(img => {
+        return id===img.id
+    })
+    return image;
+}

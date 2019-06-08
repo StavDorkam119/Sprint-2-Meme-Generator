@@ -49,17 +49,16 @@
         <ul class="clean-list main-gallery"></ul>
 
         <section class="meme-editor-canvas container flex flex-column align-center">
-            <canvas onclick="onDrawText(event)" id="meme-canvas" width="300" height="300">
-        
+            <canvas onclick="onDrawText(event)" id="meme-canvas" width="300" height="300">   
             </canvas>
-            <div class="meme-editor container">
+            <div class="meme-editor container flex flex-column">
                 <div class="image-change">
                     <a href="#"> Change Image </a>
                 </div>
                 <div class="text-add-div">
                     <label for="add-text"> Write Meme </label>
                     <input type="text" class="add-text" onkeyup="renderCanvas()">
-                    <button class="add-text" onclick="addText()">+</button>
+                    <button class="add-text" onclick="onaddText()">+</button>
                 </div>
                 <div class="font-size-div"> 
                     <label for="font-size-change">Font Size: </label>

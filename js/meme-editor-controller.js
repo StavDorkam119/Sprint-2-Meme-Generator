@@ -75,6 +75,10 @@ function onChangeTextBorderColor() {
     renderCanvas()
 }
 
+function onaddText() {
+    addText()
+}
+
 //------------------------------------------------
 
 //FUNCTION - RENDER CAVAS
@@ -94,7 +98,6 @@ function drawImage(imgPath) {
 
 function onDrawText(ev) {
     let { offsetX, offsetY } = ev;
-    console.log('on draw text!')
     drawText(offsetX, offsetY)
 }
 

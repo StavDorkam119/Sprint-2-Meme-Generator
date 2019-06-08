@@ -205,6 +205,21 @@ header input:checked+nav {
     padding: 2rem 0
 }
 
+canvas {
+    box-shadow: 5px 5px 15px 5px rgba(162, 255, 149, 0.57);
+}
+
+.meme-editor-canvas * {
+    margin-top: 1rem;
+    margin-left: 1rem;
+    font-family: Bangers;
+}
+
+.meme-editor div {
+    height: 1.5rem;
+    margin-left: 1rem;
+}
+
 
 
 /* CSS Helpers */
@@ -358,10 +373,10 @@ option[value=tahoma]{
     .gallery-item:nth-child(7n-2) {grid-column: 2/4;}
 }
 
-
 @media (min-width: 66rem) {
     .meme-editor-canvas {
         flex-direction: row;
         justify-content: space-around;
     }
+
 }

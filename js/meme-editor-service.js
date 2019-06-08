@@ -146,6 +146,7 @@ function setTextPosition(x, y, width, height) {
         rightUp: {x: x + width, y: y + height},
         rightDown: {x: x+width, y: y}
     }   
+    gMeme.txts[gCurrWord].textLocation = textLocation;
 }
 
 function sortKeywords() {

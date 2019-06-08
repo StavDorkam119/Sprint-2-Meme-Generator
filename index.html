@@ -58,7 +58,8 @@
                 </div>
                 <div class="text-add-div">
                     <label for="add-text"> Write Meme </label>
-                    <input type="text" class="add-text" onkeyup="onWriteText()">
+                    <input type="text" class="add-text" onkeyup="renderCanvas()">
+                    <button class="add-text" onclick="addText()">+</button>
                 </div>
                 <div class="font-size-div"> 
                     <label for="font-size-change">Font Size: </label>
@@ -84,6 +85,7 @@
                         <option value="lato">Lato</option>
                     </select>
                 </div>
+                
                 <div class="clear-canvas">
                     <button class="clear-canvas-btn" onclick="clearCanvas()">Clear Meme Editor</button>
                 </div>

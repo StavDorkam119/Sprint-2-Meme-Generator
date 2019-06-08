@@ -14,8 +14,21 @@ let gMeme = {
         fontColor: 'rgb(0, 0, 0)',
         fontFamily: 'eurofurence',
         textLocation: {x:'0', y:'0'},
-        textBorderColor: 'rgb(0, 0, 0,0)', 
+        textBorderColor: 'rgb(0, 0, 0)', 
     }]
+}
+
+function addText(){
+    var text = {
+        text: '',
+        fontSize: '16',
+        fontColor: 'rgb(0, 0, 0)',
+        fontFamily: 'eurofurence',
+        textLocation: {x:'0', y:'0'},
+        textBorderColor: 'rgb(0, 0, 0)', 
+    }
+    gMeme.txts.push(text);
+    gCurrWord++
 }
 // function createMeme(){
 //     var meme = {

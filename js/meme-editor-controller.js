@@ -34,7 +34,7 @@ function init() {
 
 //FUNCTION - USER EDIT MEME 
 
-function onWriteText(){
+function renderCanvas(){
     const elText = document.querySelector('.add-text').value;
     changeText(elText);
     clearCanvas()
@@ -49,18 +49,18 @@ function onWriteText(){
 function onChangeFontSize() {
     const elFontSize = document.querySelector('.font-size-change').value;
     changeFontSize(elFontSize)
-    onWriteText()
+    renderCanvas()
 }
 
 function onChangeColor() {
     const elColor = document.querySelector('.font-color-change').value;
     changeColor(elColor)
-    onWriteText()
+    renderCanvas()
 }
 
 function onChangeFont(elFont) {
     changeFont(elFont)
-    onWriteText()
+    renderCanvas()
 }
 
 function onImagePick(id) {
@@ -72,7 +72,7 @@ function onImagePick(id) {
 function onChangeTextBorderColor() {
     let elBorderColor = document.querySelector('.border-color-change').value
     changeTextBorderColor(elBorderColor)
-    onWriteText()
+    renderCanvas()
 }
 
 //------------------------------------------------
@@ -94,6 +94,7 @@ function drawImage(imgPath) {
 
 function onDrawText(ev) {
     let { offsetX, offsetY } = ev;
+    console.log('on draw text!')
     drawText(offsetX, offsetY)
 }
 
@@ -157,6 +158,7 @@ function setSizeOfCanvas() {
         gCanvas.width = 600;
         gCanvas.height = 600;
     }
+    renderCanvas()
 }
 
 

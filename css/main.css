@@ -200,7 +200,10 @@ header input:checked+nav {
 
 
 /* Meme Canvas and Editor */
-.meme-editor-canvas {padding: 2rem 0}
+
+.meme-editor-canvas {
+    padding: 2rem 0
+}
 
 
 

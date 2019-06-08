@@ -10,7 +10,20 @@
     src: url(../css/Fonts/Eurofurence/eurof55.ttf);
 }
 
+@font-face {
+    font-family: Acme;
+    src: url(../css/Fonts/Acme/Acme-Regular.ttf);
+}
 
+@font-face {
+    font-family: Bangers;
+    src: url(../css/Fonts/Bangers/Bangers-Regular.ttf);
+}
+
+@font-face {
+    font-family: Satisfy;
+    src: url(../css/Fonts/Satisfy/Satisfy-Regular.ttf);
+}
 /* CSS Style Fonts */
 
 /* CSS Base Settings */
@@ -110,7 +123,7 @@ header input:checked+nav {
 }
 
 #meme-canvas {
-    border: 1px solid black;
+    border: 5px dashed silver;
 }
 
 .list-item a {
@@ -187,7 +200,63 @@ header input:checked+nav {
 
 
 /* Meme Canvas and Editor */
-.meme-editor-canvas {padding: 2rem 0}
+
+.meme-editor-canvas {
+    background-color: rgb(213, 252, 237);
+}
+
+canvas {
+    border:5px dashed silver;
+    margin-top: 1.5rem;
+}
+
+.meme-editor {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+.meme-editor * {
+    font-family: Bangers;
+    flex-grow: 2;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.clear-canvas button{
+    background-color: rgba(245, 245, 220, 0);
+}
+.image-change ,.text-add-div,.font-size-div,.font-color-div,.font-color-div,.change-font-div,.clear-canvas,.download-meme {
+    margin-top: 1rem; 
+    padding: 1.5rem;
+    border-radius: 2px;
+    /* background-color: rgba(1, 66, 58, 0.308); */
+    background:linear-gradient(to bottom, rgba(152, 245, 234, 0.308) 5%, rgba(0, 34, 30, 0.308) 100%);
+    height: 1.5rem; 
+}
+
+.image-change:hover,
+.text-add-div:hover,
+.font-size-div:hover,
+.font-color-div:hover,
+.font-color-div:hover,
+.change-font-div:hover,
+.clear-canvas:hover,
+.download-meme:hover {
+    background:linear-gradient(to bottom, rgba(0, 34, 30, 0.308) 5%,  rgba(152, 245, 234, 0.308) 100%);
+
+}
+
+.meme-editor div {
+    margin-left: 1rem;
+    margin-right: 1rem;
+    border: 1px solid rgba(1, 27, 39, 0.616);
+}
+
+.clear-canvas-btn:hover {
+    cursor: pointer;
+}
+
+
 /* CSS Helpers */
 
 /* Lists */
@@ -252,6 +321,37 @@ header input:checked+nav {
 }
 /* Flex */
 
+/* FONTS */
+
+option[value=lato]{
+    font-family: Lato;
+}
+
+option[value=eurofurence] {
+    font-family: Eurofurence;
+}
+
+option[value=acme]{
+    font-family: Acme;
+}
+
+option[value=bangers]{
+    font-family: Bangers;
+}
+
+option[value=satisfy]{
+    font-family: Satisfy;
+}
+
+option[value=ariel]{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+option[value=tahoma]{
+    font-family:  Tahoma, 'Segoe UI',Geneva, Verdana, sans-serif
+}
+
+/* FONTS */
 
 /* CSS Helpers */
 
@@ -308,10 +408,15 @@ header input:checked+nav {
     .gallery-item:nth-child(7n-2) {grid-column: 2/4;}
 }
 
-
 @media (min-width: 66rem) {
     .meme-editor-canvas {
         flex-direction: row;
         justify-content: space-around;
     }
+
+    .meme-editor {
+        flex-wrap: nowrap;
+        flex-direction: column;
+    }
+
 }

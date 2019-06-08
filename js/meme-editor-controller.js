@@ -37,24 +37,37 @@ function init() {
 
 //FUNCTION - USER EDIT MEME 
 
+function renderCanvas(){
+    const elText = document.querySelector('.add-text').value;
+    changeText(elText);
+    clearCanvas()
 
-
+    let meme = getMemeProp()
+    let memeImg = meme[0].selectedImgId;
+    drawImage(memeImg);
+    changeText(elText);
+    drawText(gCanvas.width/2, gCanvas.height/2)
+}
 
 function onChangeFontSize() {
     const elFontSize = document.querySelector('.font-size-change').value;
     changeFontSize(elFontSize)
+    renderCanvas()
 }
 
 function onChangeColor() {
     const elColor = document.querySelector('.font-color-change').value;
     changeColor(elColor)
+    renderCanvas()
 }
 
 function onChangeFont(elFont) {
     changeFont(elFont)
+    renderCanvas()
 }
 
-function onImagePick(imgPath) {
+function onImagePick(id) {
+    let imgPath = getImgUrlById(id).imageUrl
     changeImage(imgPath)
     drawImage(imgPath)
 }
@@ -62,15 +75,22 @@ function onImagePick(imgPath) {
 function onChangeTextBorderColor() {
     let elBorderColor = document.querySelector('.border-color-change').value
     changeTextBorderColor(elBorderColor)
+    renderCanvas()
+}
+
+function onaddText() {
+    addText()
 }
 
 //------------------------------------------------
 
 //FUNCTION - RENDER CAVAS
 
-
 function clearCanvas() {
     gCtx.clearRect(0, 0, gCanvas.width, gCanvas.height);
+    gCtx.fillStyle = 'white'
+    gCtx.fillRect(0, 0, gCanvas.width, gCanvas.height)
+
 }
 
 function drawImage(selImgId) {
@@ -114,7 +134,6 @@ function downloadImg(elLink) {
     elLink.href = data
    
     elLink.download = 'YourMeme.jpg'
-
 }
 
 
@@ -124,7 +143,7 @@ function renderImageGallery () {
     let mainGallery = document.querySelector('.main-gallery');
     let strHTML = gImgs.map(img => {
         return `
-        <li class="gallery-item"><a><img data-id="${img.id}" onclick="onSetCurrMeme('${img.id}')" src=${img.imageUrl} /></a></li>`
+        <li class="gallery-item"><a><img onclick="onImagePick('${img.id}')"src=${img.imageUrl} /></a></li>`
     });
     mainGallery.innerHTML = strHTML.join('');
 }
@@ -144,6 +163,7 @@ function setSizeOfCanvas() {
         gCanvas.width = 600;
         gCanvas.height = 600;
     }
+    renderCanvas()
 }
 
 

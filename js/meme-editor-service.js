@@ -6,8 +6,30 @@ let gMeme;
 //the current word, the user edit 
 let gCurrWord = 0;
 
+let gMeme = {
+    selectedImgId: 0,
+    txts: [{
+        text: '',
+        fontSize: '16',
+        fontColor: 'rgb(0, 0, 0)',
+        fontFamily: 'eurofurence',
+        textLocation: {x:'0', y:'0'},
+        textBorderColor: 'rgb(0, 0, 0)', 
+    }]
+}
 
-
+function addText(){
+    var text = {
+        text: '',
+        fontSize: '16',
+        fontColor: 'rgb(0, 0, 0)',
+        fontFamily: 'eurofurence',
+        textLocation: {x:'0', y:'0'},
+        textBorderColor: 'rgb(0, 0, 0)', 
+    }
+    gMeme.txts.push(text);
+    gCurrWord++
+}
 // function createMeme(){
 //     var meme = {
 //         image: 'imgs/004.jpg',
@@ -97,6 +119,21 @@ function getMemeProp() {
     return [gMeme, gCurrWord];
 }
 
+//------------------------------------------------
+
+function getImgUrlById(imgId){
+    var image = gImgs.find(img=>{
+        if (imgId === img.id) return img.imageUrl
+    })
+    return image
+}
+
+function getImgIdByUrl(imgUrl){
+    var image = gImgs.find(img=>{
+        if (imgUrl === img.imageUrl) return img.id
+    })
+    return image
+}
 
 //------------------------------------------------
 
@@ -104,23 +141,12 @@ function getMemeProp() {
 
 function setTextPosition(x, y, width, height) {
     let textLocation = {
-        leftUp: {
-            x: x,
-            y: y + height
-        },
-        leftDown: {
-            x: x,
-            y: y
-        },
-        rightUp: {
-            x: x + width,
-            y: y + height
-        },
-        rightDown: {
-            x: x + width,
-            y: y
-        }
-    }
+        leftUp: { x: x, y: y + height },
+        leftDown: {x: x, y: y},
+        rightUp: {x: x + width, y: y + height},
+        rightDown: {x: x+width, y: y}
+    }   
+    gMeme.txts[gCurrWord].textLocation = textLocation;
 }
 
 function sortKeywords() {

@@ -73,22 +73,22 @@ header {
     z-index: 99;
 }
 
-header input {
+header > input {
     display: none;
 }
 
 header nav {
     position: absolute;
     top: 100%;
-    right: 0;
+    left: 0;
     width: 100vw;
     text-align: center;
-}
-
-header nav {
-    transform: translateX(-100%);
+    transform: scaleY(0);
+    transform-origin: top;
     transition: transform 500ms;
 }
+
+
 
 header h1 {
     margin: auto;
@@ -99,7 +99,12 @@ header h1 {
 }
 
 header input:checked+nav {
-    transform: translateX(0);
+    transform: scaleY(1);
+}
+
+.nav-menu li:first-child input{
+    width: 60%;
+    height: 2rem;
 }
 
 
@@ -132,6 +137,17 @@ header input:checked+nav {
 }
 
 /* Main Gallery */
+
+.keyword-search-container {
+    margin: 0 auto;
+}
+
+.famous-keyword-container {
+    background-color: aqua;
+    align-self: stretch;
+    flex-basis: 10rem;
+}
+
 .main-gallery-container {
     padding: 10px;
 }
@@ -247,6 +263,9 @@ header input:checked+nav {
     justify-self: flex-end;
 }
 
+.flex-wrap {
+    flex-wrap: wrap;
+}
 /* Flex */
 
 /* FONTS */
@@ -310,6 +329,7 @@ option[value=tahoma]{
 }
 
 @media (min-width: 32rem) {
+
     .main-gallery.clean-list {
         max-width: 30rem;
         grid-template-columns: repeat(6, 5rem);
@@ -321,6 +341,10 @@ option[value=tahoma]{
 }
 
 @media (min-width: 42rem) {
+
+    .nav-menu-toggle-label {visibility: hidden}
+    .nav-menu {display: none}
+
     .main-gallery.clean-list {
         max-width: 40rem;
         grid-template-columns: repeat(8, 5rem);

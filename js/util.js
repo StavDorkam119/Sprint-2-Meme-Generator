@@ -34,3 +34,5 @@ function findImgByIndex(id){
     })
     return image;
 }
+
+

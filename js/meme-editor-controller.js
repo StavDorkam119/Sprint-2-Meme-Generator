@@ -16,17 +16,15 @@ function init() {
         gKeywords = getKeywordsData();
     }
     renderImageGallery();
+    renderFamousKeywords();
     //Added Responsive Resizing to the Canvas:
     window.addEventListener('resize', setSizeOfCanvas);
-    
-    setSizeOfCanvas();
-    //Added event listener for drag and drop:
-    // mouseHandle = {
-    //     x: gCanvas.width/2,
-    //     y: gCanvas.height/2
-    // };
 
-    // util.
+
+    document.getElementById("keyword-search").addEventListener('input', onFilterGallery, event)
+    document.getElementById("keyword-search-desktop").addEventListener('input', onFilterGallery, event)
+    setSizeOfCanvas();
+
     //--------------------------------------------
     saveToStorage('gImgs', gImgs);
     saveToStorage('gKeywords', gKeywords);
@@ -160,4 +158,44 @@ function setSizeOfCanvas() {
         gCanvas.height = 600;
     }
 }
-    
+
+
+function onFilterGallery(event) {
+    //convert input str into a regex format
+
+    let inputStr = event.currentTarget.value;
+    if (!inputStr) {
+        renderImageGallery();
+        return;
+    }
+    if (inputStr[inputStr.length-1] === ' ') return;
+    inputStr = inputStr.split(' ');
+    inputStr.forEach((word, index, thisArray)=> {thisArray[index] = `(?=.*${word})`});
+    inputStr = '^' + inputStr.join(''); + '.*$';
+    let regex = new RegExp(inputStr, 'gi');
+    let filteredImgs = gImgs.filter(img => {
+        let imgKeywordsStr = img.keywords.join(' ');
+        return regex.test(imgKeywordsStr);
+    });
+    if (!filteredImgs || !filteredImgs.length) {
+        console.log('No images matched');
+        renderImageGallery();
+    }
+    let mainGallery = document.querySelector('.main-gallery');
+    let strHTML = filteredImgs.map(img => {
+        return `
+        <li class="gallery-item"><a><img onclick="drawImage('${img.imageUrl}')"src=${img.imageUrl} /></a></li>`
+    });
+    mainGallery.innerHTML = strHTML.join('');
+}
+
+function renderFamousKeywords() {
+    const elFamousKeywordDisplay = document.querySelector('.famous-keyword-container');
+    let strHTML;
+    let sortedKeywords = sortKeywords();
+    sortedKeywords = sortedKeywords.slice(0, 8);
+    strHTML = sortedKeywords.map(item => {
+        return `<h3 style="font-size: ${item[1]}em">${item[0]}</h3>`
+    })
+    elFamousKeywordDisplay.innerHTML = strHTML.join('');
+}

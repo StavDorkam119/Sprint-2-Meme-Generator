@@ -7,7 +7,6 @@ let mouseHandle;
 function init() {
     gCanvas = document.getElementById('meme-canvas');
     gCtx = gCanvas.getContext('2d');
-    gMeme = setGMemeDefault();
     //Get Data From Local Storage and set to default if not avaliable:
     gImgs = loadFromStorage('gImgs');
     if (!gImgs || !gImgs.length) {
@@ -93,8 +92,9 @@ function clearCanvas() {
 
 }
 
-function drawImage(selImgId) {
-    let img = document.querySelector(`[data-id=${selImgId}]`);
+function drawImage(imgPath) {
+    var img = new Image();
+    img.src = imgPath;
     gCtx.drawImage(img, 0, 0, gCanvas.width, gCanvas.height);
 }
 

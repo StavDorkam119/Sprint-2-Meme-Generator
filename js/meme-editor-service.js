@@ -2,7 +2,6 @@
 
 let gImgs;
 let gKeywords;
-let gMeme;
 //the current word, the user edit 
 let gCurrWord = 0;
 

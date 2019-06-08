@@ -81,7 +81,6 @@ function onChangeTextBorderColor() {
 
 //FUNCTION - RENDER CAVAS
 
-
 function clearCanvas() {
     gCtx.clearRect(0, 0, gCanvas.width, gCanvas.height);
     gCtx.fillStyle = 'white'
@@ -131,7 +130,6 @@ function downloadImg(elLink) {
     elLink.href = data
    
     elLink.download = 'YourMeme.jpg'
-
 }
 
 

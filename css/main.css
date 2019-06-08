@@ -186,33 +186,8 @@ header input:checked+nav {
 /* Meme Canvas and Editor */
 .meme-editor-canvas {padding: 2rem 0}
 
-option[value=lato]{
-    font-family: Lato;
-}
 
-option[value=eurofurence] {
-    font-family: Eurofurence;
-}
 
-option[value=acme]{
-    font-family: Acme;
-}
-
-option[value=bangers]{
-    font-family: Bangers;
-}
-
-option[value=satisfy]{
-    font-family: Satisfy;
-}
-
-option[value=ariel]{
-    font-family: Arial, Helvetica, sans-serif;
-}
-
-option[value=tahoma]{
-    font-family:  Tahoma, 'Segoe UI',Geneva, Verdana, sans-serif
-}
 /* CSS Helpers */
 
 /* Lists */
@@ -274,6 +249,37 @@ option[value=tahoma]{
 
 /* Flex */
 
+/* FONTS */
+
+option[value=lato]{
+    font-family: Lato;
+}
+
+option[value=eurofurence] {
+    font-family: Eurofurence;
+}
+
+option[value=acme]{
+    font-family: Acme;
+}
+
+option[value=bangers]{
+    font-family: Bangers;
+}
+
+option[value=satisfy]{
+    font-family: Satisfy;
+}
+
+option[value=ariel]{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+option[value=tahoma]{
+    font-family:  Tahoma, 'Segoe UI',Geneva, Verdana, sans-serif
+}
+
+/* FONTS */
 
 /* CSS Helpers */
 

@@ -123,7 +123,7 @@ header input:checked+nav {
 }
 
 #meme-canvas {
-    border: 1px solid black;
+    border: 5px dashed silver;
 }
 
 .list-item a {
@@ -202,24 +202,59 @@ header input:checked+nav {
 /* Meme Canvas and Editor */
 
 .meme-editor-canvas {
-    padding: 2rem 0
+    background-color: rgb(213, 252, 237);
 }
 
 canvas {
-    box-shadow: 5px 5px 15px 5px rgba(162, 255, 149, 0.57);
+    border:5px dashed silver;
+    margin-top: 1.5rem;
 }
 
-.meme-editor-canvas * {
-    margin-top: 1rem;
-    margin-left: 1rem;
+.meme-editor {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+.meme-editor * {
     font-family: Bangers;
+    flex-grow: 2;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.clear-canvas button{
+    background-color: rgba(245, 245, 220, 0);
+}
+.image-change ,.text-add-div,.font-size-div,.font-color-div,.font-color-div,.change-font-div,.clear-canvas,.download-meme {
+    margin-top: 1rem; 
+    padding: 1.5rem;
+    border-radius: 2px;
+    /* background-color: rgba(1, 66, 58, 0.308); */
+    background:linear-gradient(to bottom, rgba(152, 245, 234, 0.308) 5%, rgba(0, 34, 30, 0.308) 100%);
+    height: 1.5rem; 
+}
+
+.image-change:hover,
+.text-add-div:hover,
+.font-size-div:hover,
+.font-color-div:hover,
+.font-color-div:hover,
+.change-font-div:hover,
+.clear-canvas:hover,
+.download-meme:hover {
+    background:linear-gradient(to bottom, rgba(0, 34, 30, 0.308) 5%,  rgba(152, 245, 234, 0.308) 100%);
+
 }
 
 .meme-editor div {
-    height: 1.5rem;
     margin-left: 1rem;
+    margin-right: 1rem;
+    border: 1px solid rgba(1, 27, 39, 0.616);
 }
 
+.clear-canvas-btn:hover {
+    cursor: pointer;
+}
 
 
 /* CSS Helpers */
@@ -377,6 +412,11 @@ option[value=tahoma]{
     .meme-editor-canvas {
         flex-direction: row;
         justify-content: space-around;
+    }
+
+    .meme-editor {
+        flex-wrap: nowrap;
+        flex-direction: column;
     }
 
 }

@@ -16,19 +16,15 @@ function init() {
         gKeywords = getKeywordsData();
     }
     renderImageGallery();
-
-
+    renderFamousKeywords();
     //Added Responsive Resizing to the Canvas:
     window.addEventListener('resize', setSizeOfCanvas);
-    document.getElementById("keyword-search").addEventListener('input', onFilterGallery, event)
-    setSizeOfCanvas();
-    //Added event listener for drag and drop:
-    // mouseHandle = {
-    //     x: gCanvas.width/2,
-    //     y: gCanvas.height/2
-    // };
 
-    // util.
+
+    document.getElementById("keyword-search").addEventListener('input', onFilterGallery, event)
+    document.getElementById("keyword-search-desktop").addEventListener('input', onFilterGallery, event)
+    setSizeOfCanvas();
+
     //--------------------------------------------
     saveToStorage('gImgs', gImgs);
     saveToStorage('gKeywords', gKeywords);
@@ -172,7 +168,6 @@ function onFilterGallery(event) {
     inputStr.forEach((word, index, thisArray)=> {thisArray[index] = `(?=.*${word})`});
     inputStr = '^' + inputStr.join(''); + '.*$';
     let regex = new RegExp(inputStr, 'gi');
-    // debugger;
     let filteredImgs = gImgs.filter(img => {
         let imgKeywordsStr = img.keywords.join(' ');
         return regex.test(imgKeywordsStr);
@@ -189,3 +184,13 @@ function onFilterGallery(event) {
     mainGallery.innerHTML = strHTML.join('');
 }
 
+function renderFamousKeywords() {
+    const elFamousKeywordDisplay = document.querySelector('.famous-keyword-container');
+    let strHTML;
+    let sortedKeywords = sortKeywords();
+    sortedKeywords = sortedKeywords.slice(0, 8);
+    strHTML = sortedKeywords.map(item => {
+        return `<h3 style="font-size: ${item[1]}em">${item[0]}</h3>`
+    })
+    elFamousKeywordDisplay.innerHTML = strHTML.join('');
+}

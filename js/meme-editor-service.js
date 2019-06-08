@@ -119,3 +119,9 @@ function setTextPosition(x, y, width, height) {
         rightDown: {x: x+width, y: y}
     }   
 }
+
+function sortKeywords() {
+    let sortedKeywords = Object.entries(gKeywords);
+    sortedKeywords.sort((a,b) => b[1] - a[1]);
+    return sortedKeywords;
+}

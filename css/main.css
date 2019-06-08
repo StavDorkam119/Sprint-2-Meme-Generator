@@ -123,6 +123,17 @@ header input:checked+nav {
 }
 
 /* Main Gallery */
+
+.keyword-search-container {
+    margin: 0 auto;
+}
+
+.famous-keyword-container {
+    background-color: aqua;
+    align-self: stretch;
+    flex-basis: 10rem;
+}
+
 .main-gallery-container {
     padding: 10px;
 }
@@ -235,6 +246,9 @@ header input:checked+nav {
     justify-self: flex-end;
 }
 
+.flex-wrap {
+    flex-wrap: wrap;
+}
 /* Flex */
 
 

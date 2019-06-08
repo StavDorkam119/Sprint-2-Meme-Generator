@@ -7,6 +7,8 @@ let mouseHandle;
 function init() {
     gCanvas = document.getElementById('meme-canvas');
     gCtx = gCanvas.getContext('2d');
+    gMeme = setGMemeDefault();
+    //Get Data From Local Storage and set to default if not avaliable:
     gImgs = loadFromStorage('gImgs');
     if (!gImgs || !gImgs.length) {
         gImgs = gImgsDefault();
@@ -15,6 +17,7 @@ function init() {
     if (!gKeywords) {
         gKeywords = getKeywordsData();
     }
+    //--------------------------------------------
     renderImageGallery();
     renderFamousKeywords();
     //Added Responsive Resizing to the Canvas:
@@ -34,18 +37,8 @@ function init() {
 
 //FUNCTION - USER EDIT MEME 
 
-function onWriteText(){
-    const elText = document.querySelector('.text-add').value;
-    changeText(elText);
-    clearCanvas()
 
-    let meme = getMemeProp()
-    let memeImg = meme[0].selectedImgId;
-    drawImage(memeImg);
-    changeText(elText);
-    drawText(gCanvas.width/2, gCanvas.height/2)
 
-}
 
 function onChangeFontSize() {
     const elFontSize = document.querySelector('.font-size-change').value;
@@ -80,9 +73,8 @@ function clearCanvas() {
     gCtx.clearRect(0, 0, gCanvas.width, gCanvas.height);
 }
 
-function drawImage(imgPath) {
-    var img = new Image();
-    img.src = imgPath;
+function drawImage(selImgId) {
+    let img = document.querySelector(`[data-id=${selImgId}]`);
     gCtx.drawImage(img, 0, 0, gCanvas.width, gCanvas.height);
 }
 
@@ -132,7 +124,7 @@ function renderImageGallery () {
     let mainGallery = document.querySelector('.main-gallery');
     let strHTML = gImgs.map(img => {
         return `
-        <li class="gallery-item"><a><img onclick="onImagePick('${img.imageUrl}')"src=${img.imageUrl} /></a></li>`
+        <li class="gallery-item"><a><img data-id="${img.id}" onclick="onSetCurrMeme('${img.id}')" src=${img.imageUrl} /></a></li>`
     });
     mainGallery.innerHTML = strHTML.join('');
 }
@@ -179,7 +171,7 @@ function onFilterGallery(event) {
     let mainGallery = document.querySelector('.main-gallery');
     let strHTML = filteredImgs.map(img => {
         return `
-        <li class="gallery-item"><a><img onclick="drawImage('${img.imageUrl}')"src=${img.imageUrl} /></a></li>`
+        <li class="gallery-item"><a><img data-id="${img.id}" onclick="onSetCurrMeme('${img.id}')" src=${img.imageUrl} /></a></li>`
     });
     mainGallery.innerHTML = strHTML.join('');
 }

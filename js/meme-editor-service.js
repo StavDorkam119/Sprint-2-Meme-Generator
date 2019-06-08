@@ -2,21 +2,12 @@
 
 let gImgs;
 let gKeywords;
-let gEditorSettings;
+let gMeme;
 //the current word, the user edit 
 let gCurrWord = 0;
 
-let gMeme = {
-    selectedImgId: 0,
-    txts: [{
-        text: '',
-        fontSize: '16',
-        fontColor: 'rgb(0, 0, 0)',
-        fontFamily: 'eurofurence',
-        textLocation: {x:'0', y:'0'},
-        textBorderColor: 'rgb(0, 0, 0,0)', 
-    }]
-}
+
+
 // function createMeme(){
 //     var meme = {
 //         image: 'imgs/004.jpg',
@@ -27,7 +18,7 @@ let gMeme = {
 //         fontStyle: 'none',
 //         textLocation: {x:'0', y:'0'},
 //         textBorderColor: 'rgb(0, 0, 0,0)',
-        
+
 //     }
 //     return meme;
 // }
@@ -35,7 +26,7 @@ let gMeme = {
 
 function createImgTemplate(imageUrl, keywords) {
     //Return image object to push into Img Service Data;
-    return  {
+    return {
         id: makeId(),
         imageUrl: imageUrl,
         keywords: keywords.split(' '),
@@ -62,7 +53,7 @@ function gImgsDefault() {
 
 
 function getKeywordsData() {
-   return gImgs.reduce((acc, img) => {
+    return gImgs.reduce((acc, img) => {
         img.keywords.forEach(keyword => {
             if (!acc[keyword]) acc[keyword] = 1;
             else acc[keyword]++;
@@ -86,12 +77,12 @@ function changeText(str) {
     gMeme.txts[gCurrWord].text = str;
 }
 
-function changeFontSize(size){
+function changeFontSize(size) {
     gMeme.txts[gCurrWord].fontSize = size;
 }
 
-function changeColor(color){ 
-    gMeme.txts[gCurrWord].fontColor = color;    
+function changeColor(color) {
+    gMeme.txts[gCurrWord].fontColor = color;
 }
 
 function changeFont(font) {
@@ -99,11 +90,11 @@ function changeFont(font) {
 }
 
 function changeTextBorderColor(borderColor) {
-    gMeme.txts[gCurrWord].textBorderColor = borderColor;   
+    gMeme.txts[gCurrWord].textBorderColor = borderColor;
 }
 
-function getMemeProp(){
-    return [gMeme,gCurrWord];
+function getMemeProp() {
+    return [gMeme, gCurrWord];
 }
 
 
@@ -113,15 +104,27 @@ function getMemeProp(){
 
 function setTextPosition(x, y, width, height) {
     let textLocation = {
-        leftUp: { x: x, y: y + height },
-        leftDown: {x: x, y: y},
-        rightUp: {x: x + width, y: y + height},
-        rightDown: {x: x+width, y: y}
-    }   
+        leftUp: {
+            x: x,
+            y: y + height
+        },
+        leftDown: {
+            x: x,
+            y: y
+        },
+        rightUp: {
+            x: x + width,
+            y: y + height
+        },
+        rightDown: {
+            x: x + width,
+            y: y
+        }
+    }
 }
 
 function sortKeywords() {
     let sortedKeywords = Object.entries(gKeywords);
-    sortedKeywords.sort((a,b) => b[1] - a[1]);
+    sortedKeywords.sort((a, b) => b[1] - a[1]);
     return sortedKeywords;
 }

@@ -43,41 +43,41 @@
             </canvas>
             <div class="meme-editor container">
                 <div class="image-change">
-                    <a href="#">
-                        Change Image
-                    </a>
+                    <a href="#"> Change Image </a>
                 </div>
                 <div class="text-add-div">
-                    <label for="text-add">
-                        Write Meme
-                    </label>
-                    <input type="text" class="text-add" onkeyup="onWriteText()">
+                    <label for="add-text"> Write Meme </label>
+                    <input type="text" class="add-text" onkeyup="onWriteText()">
                 </div>
-                <div class="font-size-div">
-                    Change Font Size: 
-                    <input type="number" class="font-size-change" onchange="onChangeFontSize()" min="10">
+                <div class="font-size-div"> 
+                    <label for="font-size-change">Font Size: </label>
+                    <input type="number" class="font-size-change" onchange="onChangeFontSize()" placeholder="10" min="10">
                 </div>
                 <div class="font-color-div">
-                    Change Font Color: 
+                    <label for="font-color-change">Font Color: </label>
                     <input type="color" class="font-color-change" onchange="onChangeColor()">
                 </div>
                 <div class="font-color-div">
-                    Change Font Border Color: 
+                    <label for="border-color-change">Font Border Color:</label>
                     <input type="color" class="border-color-change" onchange="onChangeTextBorderColor()">
                 </div>
                 <div class="change-font-div">
-                    Change Font:
+                    <label>Change Font:</label>
                     <select onchange="onChangeFont(this.value)">
-                        <option value="eurofurence"></option>
+                        <option value="eurofurence">Eurofurence</option>
                         <option value="ariel">Ariel</option>
                         <option value="tahoma">Tahoma</option>
+                        <option value="acme">Acme</option>
+                        <option value="bangers">Bangers</option>
+                        <option value="satisfy">Satisfy</option>
+                        <option value="lato">Lato</option>
                     </select>
                 </div>
                 <div class="clear-canvas">
                     <button class="clear-canvas-btn" onclick="clearCanvas()">Clear Meme Editor</button>
                 </div>
                 <div class="download-meme">
-                        <a class="download-link" href="#" onclick="downloadImg(this)" download="">Download</a>
+                    <a class="download-link" href="#" onclick="downloadImg(this)" download="">Download</a>
                 </div>
         
             </div>

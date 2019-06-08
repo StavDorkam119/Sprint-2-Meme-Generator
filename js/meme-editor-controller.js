@@ -37,7 +37,7 @@ function init() {
 //FUNCTION - USER EDIT MEME 
 
 function onWriteText(){
-    const elText = document.querySelector('.text-add').value;
+    const elText = document.querySelector('.add-text').value;
     changeText(elText);
     clearCanvas()
 
@@ -46,24 +46,27 @@ function onWriteText(){
     drawImage(memeImg);
     changeText(elText);
     drawText(gCanvas.width/2, gCanvas.height/2)
-
 }
 
 function onChangeFontSize() {
     const elFontSize = document.querySelector('.font-size-change').value;
     changeFontSize(elFontSize)
+    onWriteText()
 }
 
 function onChangeColor() {
     const elColor = document.querySelector('.font-color-change').value;
     changeColor(elColor)
+    onWriteText()
 }
 
 function onChangeFont(elFont) {
     changeFont(elFont)
+    onWriteText()
 }
 
-function onImagePick(imgPath) {
+function onImagePick(id) {
+    let imgPath = getImgUrlById(id).imageUrl
     changeImage(imgPath)
     drawImage(imgPath)
 }
@@ -71,6 +74,7 @@ function onImagePick(imgPath) {
 function onChangeTextBorderColor() {
     let elBorderColor = document.querySelector('.border-color-change').value
     changeTextBorderColor(elBorderColor)
+    onWriteText()
 }
 
 //------------------------------------------------
@@ -80,6 +84,9 @@ function onChangeTextBorderColor() {
 
 function clearCanvas() {
     gCtx.clearRect(0, 0, gCanvas.width, gCanvas.height);
+    gCtx.fillStyle = 'white'
+    gCtx.fillRect(0, 0, gCanvas.width, gCanvas.height)
+
 }
 
 function drawImage(imgPath) {
@@ -134,7 +141,7 @@ function renderImageGallery () {
     let mainGallery = document.querySelector('.main-gallery');
     let strHTML = gImgs.map(img => {
         return `
-        <li class="gallery-item"><a><img onclick="onImagePick('${img.imageUrl}')"src=${img.imageUrl} /></a></li>`
+        <li class="gallery-item"><a><img onclick="onImagePick('${img.id}')"src=${img.imageUrl} /></a></li>`
     });
     mainGallery.innerHTML = strHTML.join('');
 }

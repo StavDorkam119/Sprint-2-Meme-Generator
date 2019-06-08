@@ -10,6 +10,20 @@
     src: url(../css/Fonts/Eurofurence/eurof55.ttf);
 }
 
+@font-face {
+    font-family: Acme;
+    src: url(../css/Fonts/Acme/Acme-Regular.ttf);
+}
+
+@font-face {
+    font-family: Bangers;
+    src: url(../css/Fonts/Bangers/Bangers-Regular.ttf);
+}
+
+@font-face {
+    font-family: Satisfy;
+    src: url(../css/Fonts/Satisfy/Satisfy-Regular.ttf);
+}
 /* CSS Style Fonts */
 
 /* CSS Base Settings */
@@ -171,6 +185,34 @@ header input:checked+nav {
 
 /* Meme Canvas and Editor */
 .meme-editor-canvas {padding: 2rem 0}
+
+option[value=lato]{
+    font-family: Lato;
+}
+
+option[value=eurofurence] {
+    font-family: Eurofurence;
+}
+
+option[value=acme]{
+    font-family: Acme;
+}
+
+option[value=bangers]{
+    font-family: Bangers;
+}
+
+option[value=satisfy]{
+    font-family: Satisfy;
+}
+
+option[value=ariel]{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+option[value=tahoma]{
+    font-family:  Tahoma, 'Segoe UI',Geneva, Verdana, sans-serif
+}
 /* CSS Helpers */
 
 /* Lists */

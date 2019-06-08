@@ -106,6 +106,21 @@ function getMemeProp(){
     return [gMeme,gCurrWord];
 }
 
+//------------------------------------------------
+
+function getImgUrlById(imgId){
+    var image = gImgs.find(img=>{
+        if (imgId === img.id) return img.imageUrl
+    })
+    return image
+}
+
+function getImgIdByUrl(imgUrl){
+    var image = gImgs.find(img=>{
+        if (imgUrl === img.imageUrl) return img.id
+    })
+    return image
+}
 
 //------------------------------------------------
 

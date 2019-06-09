@@ -3,13 +3,14 @@
 let gImgs;
 let gKeywords;
 //the current word, the user edit 
-let gCurrWord = 0;
+let gTextCount;
 
-let gMeme = {
-    selectedImgId: 0,
-    txts: [{
+let gMeme;
+
+function addText(id){
+    return {
         textValue: '',
-        textId: '0',
+        textId: id,
         fontSize: '40',
         fontColor: '#fff',
         fontFamily: 'Impact',
@@ -30,20 +31,14 @@ let gMeme = {
             gCtx.fillText(this.textValue, this.textCoords.x, this.textCoords.y);
             gCtx.strokeText(this.textValue, this.textCoords.x, this.textCoords.y);
         }
-    }]
+}
 }
 
-function addText(){
-    var text = {
-        text: '',
-        fontSize: '16',
-        fontColor: 'rgb(0, 0, 0)',
-        fontFamily: 'eurofurence',
-        textCoords: {x: 50, y: 50},
-        textBorderColor: 'rgb(0, 0, 0)', 
+function getGMemeDefault () {
+     return {
+        selectedImgId: 0,
+        txts: [addText('1')]
     }
-    gMeme.txts.push(text);
-    gCurrWord++
 }
 
 function getImage(id) {
@@ -96,6 +91,10 @@ function getKeywordsData() {
 
 //FUNCTION - USER EDIT MEME 
 
+function setSelectedText(id) {
+    gMeme.selectedText = id;
+}
+
 function changeImage(img) {
     gMeme.selectedImgId = img;
 }
@@ -128,9 +127,6 @@ function changeTextBorderColor(borderColor) {
     return txt;
 }
 
-function getMemeProp() {
-    return [gMeme, gCurrWord];
-}
 
 //------------------------------------------------
 

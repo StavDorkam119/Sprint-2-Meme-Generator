@@ -17,8 +17,11 @@ function init() {
         gKeywords = getKeywordsData();
     }
     //--------------------------------------------
+    gMeme = getGMemeDefault();
+    gTextCount = gMeme.txts.length;
     renderImageGallery();
     renderFamousKeywords();
+    renderMemeEditor();
     //Added Responsive Resizing to the Canvas:
     window.addEventListener('resize', setSizeOfCanvas);
     // document.querySelector.addEventListener('resize', setSizeOfCanvas);
@@ -31,7 +34,7 @@ function init() {
     //--------------------------------------------
     saveToStorage('gImgs', gImgs);
     saveToStorage('gKeywords', gKeywords);
-} 
+}
 
 //-----------------------------------------------
 
@@ -44,7 +47,7 @@ function init() {
 
 //     let meme = getMemeProp()
 //     let memeImg = meme[0].selectedImgId;
-    
+
 //     drawImage(memeImg);
 //     changeText(elText);
 //     drawText(gCanvas.width/2, gCanvas.height/2)
@@ -84,10 +87,9 @@ function onChangeTextBorderColor(elColor) {
     txt.draw();
 }
 
-function onaddText() {
-    addText()
+function onSetTxt(id) {
+    setSelectedText(id);
 }
-
 //------------------------------------------------
 
 //FUNCTION - RENDER CAVAS
@@ -106,16 +108,20 @@ function onDrawText(id) {
     clearCanvas();
     let image = getImage(gMeme.selectedImgId);
     drawImage(image);
-    const input = document.querySelector('[data-input-id="0"]')
-    let text = gMeme.txts[+id];
+    // debugger;
+    const input = document.querySelector(`[data-input-id="${id}"]`)
+    let text = gMeme.txts[+id - 1];
     gMeme.selectedTxt = text.textId;
     text.textValue = input.value;
     text.textWidth = gCtx.measureText(input.value);
-    text.textCoords = {x: gCanvas.width/2, y: 50};
+    text.textCoords = {
+        x: gCanvas.width / 2,
+        y: 50
+    };
     text.draw();
 
     //print the text on canvas
-    
+
 
     // let textWidth = gCtx.measureText(meme.text).width;
     // setTextPosition(x, y, textWidth, parseInt(meme.fontSize))
@@ -129,14 +135,14 @@ function downloadImg(elLink) {
     // var imgContent = gCanvas.toDataURL('image/jpeg');
     let data = gCanvas.toDataURL()
     elLink.href = data
-   
+
     elLink.download = 'YourMeme.jpg'
 }
 
 
 //FUNCTION: Render Image Gallery 
 
-function renderImageGallery () {
+function renderImageGallery() {
     let mainGallery = document.querySelector('.main-gallery');
     let strHTML = gImgs.map(img => {
         return `
@@ -146,17 +152,16 @@ function renderImageGallery () {
 }
 
 function setSizeOfCanvas() {
-    if (window.innerWidth <= 16*22) {
+    if (window.innerWidth <= 16 * 22) {
         gCanvas.width = window.innerWidth - 50;
         gCanvas.height = window.innerWidth - 50;
-    }
-    else if (window.innerWidth <= 16*32) {
+    } else if (window.innerWidth <= 16 * 32) {
         gCanvas.width = 300;
         gCanvas.height = 300;
-    } else if (window.innerWidth >= 16*42 && window.innerWidth < 16*66) {
+    } else if (window.innerWidth >= 16 * 42 && window.innerWidth < 16 * 66) {
         gCanvas.width = 450;
         gCanvas.height = 450;
-    } else if (window.innerWidth >= 16*66) {
+    } else if (window.innerWidth >= 16 * 66) {
         gCanvas.width = 600;
         gCanvas.height = 600;
     }
@@ -172,9 +177,11 @@ function onFilterGallery(event) {
         renderImageGallery();
         return;
     }
-    if (inputStr[inputStr.length-1] === ' ') return;
+    if (inputStr[inputStr.length - 1] === ' ') return;
     inputStr = inputStr.split(' ');
-    inputStr.forEach((word, index, thisArray)=> {thisArray[index] = `(?=.*${word})`});
+    inputStr.forEach((word, index, thisArray) => {
+        thisArray[index] = `(?=.*${word})`
+    });
     inputStr = '^' + inputStr.join(''); + '.*$';
     let regex = new RegExp(inputStr, 'gi');
     let filteredImgs = gImgs.filter(img => {
@@ -207,4 +214,54 @@ function renderFamousKeywords() {
         return `<option value="${item[0]}">`
     });
     dataList.innerHTML = dataListStr.join('');
+}
+
+function renderMemeEditor() {
+    const elMemeEditor = document.querySelector('.meme-editor');
+    let strHTML = gMeme.txts.map(txt => {
+        return `<div class="text-wrapper">
+        <div class="text-add-div" onclick="onSetTxt('${txt.textId}')">
+                <label for="add-text"> Write Meme </label>
+                <input type="text" class="add-text" data-input-id="${txt.textId}" oninput="onDrawText('${txt.textId}')">
+                <button class="add-text" onclick="onaddText()">+</button>
+            </div>
+            <div class="font-size-div"> 
+                <label for="font-size-change">Font Size: </label>
+                <input type="number" class="font-size-change" onchange="onChangeFontSize(this.value)" placeholder="10" min="10">
+            </div>
+            <div class="font-color-div">
+                <label for="font-color-change">Font Color: </label>
+                <input type="color" class="font-color-change" onchange="onChangeTextColor(this.value)">
+            </div>
+            <div class="font-color-div">
+                <label for="border-color-change">Font Border Color:</label>
+                <input type="color" class="border-color-change" onchange="onChangeTextBorderColor(this.value)">
+            </div>
+            <div class="change-font-div">
+                <label>Change Font:</label>
+                <select onchange="onChangeFont(this.value)">
+                    <option selected="Impact">Impact</option>
+                    <option value="eurofurence">Eurofurence</option>
+                    <option value="ariel">Ariel</option>
+                    <option value="tahoma">Tahoma</option>
+                    <option value="acme">Acme</option>
+                    <option value="bangers">Bangers</option>
+                    <option value="satisfy">Satisfy</option>
+                    <option value="lato">Lato</option>
+                </select>
+            </div>
+            <div class="clear-canvas">
+                <button class="clear-canvas-btn" onclick="clearCanvas()">Clear Meme Editor</button>
+            </div>
+            <div class="download-meme">
+                <a class="download-link" href="#" onclick="downloadImg(this)" download="">Download</a>
+            </div>
+    </div>`
+    });
+    elMemeEditor.innerHTML = strHTML.join('');
+}
+
+function onAddText () {
+    gMeme.txts.push(addText(`${++gTextCount}`));
+    renderMemeEditor();
 }

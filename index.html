@@ -52,48 +52,8 @@
             <div class="canvas wrapper">
                 <canvas id="meme-canvas" width="300" height="300"></canvas>
             </div>
-            <div class="meme-editor container flex ">
-                <div class="image-change">
-                    <a href="#"> Change Image </a>
-                </div>
-                <div class="text-add-div">
-                    <label for="add-text"> Write Meme </label>
-                    <input type="text" class="add-text" data-input-id="0" oninput="onDrawText('0')">
-                    <button class="add-text" onclick="onaddText()">+</button>
-                </div>
-                <div class="font-size-div"> 
-                    <label for="font-size-change">Font Size: </label>
-                    <input type="number" class="font-size-change" onchange="onChangeFontSize(this.value)" placeholder="10" min="10">
-                </div>
-                <div class="font-color-div">
-                    <label for="font-color-change">Font Color: </label>
-                    <input type="color" class="font-color-change" onchange="onChangeTextColor(this.value)">
-                </div>
-                <div class="font-color-div">
-                    <label for="border-color-change">Font Border Color:</label>
-                    <input type="color" class="border-color-change" onchange="onChangeTextBorderColor(this.value)">
-                </div>
-                <div class="change-font-div">
-                    <label>Change Font:</label>
-                    <select onchange="onChangeFont(this.value)">
-                        <option selected="Impact">Impact</option>
-                        <option value="eurofurence">Eurofurence</option>
-                        <option value="ariel">Ariel</option>
-                        <option value="tahoma">Tahoma</option>
-                        <option value="acme">Acme</option>
-                        <option value="bangers">Bangers</option>
-                        <option value="satisfy">Satisfy</option>
-                        <option value="lato">Lato</option>
-                    </select>
-                </div>
-                <div class="clear-canvas">
-                    <button class="clear-canvas-btn" onclick="clearCanvas()">Clear Meme Editor</button>
-                </div>
-                <div class="download-meme">
-                    <a class="download-link" href="#" onclick="downloadImg(this)" download="">Download</a>
-                </div>
-        
-            </div>
+            <button onclick="onAddText()">Add Line</button>
+            <div class="meme-editor container flex"></div>
         </section>
     </main>
 

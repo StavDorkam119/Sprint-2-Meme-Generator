@@ -8,12 +8,28 @@ let gCurrWord = 0;
 let gMeme = {
     selectedImgId: 0,
     txts: [{
-        text: '',
-        fontSize: '16',
-        fontColor: 'rgb(0, 0, 0)',
-        fontFamily: 'eurofurence',
-        textLocation: {x:'0', y:'0'},
-        textBorderColor: 'rgb(0, 0, 0)', 
+        textValue: '',
+        textId: '0',
+        fontSize: '40',
+        fontColor: '#fff',
+        fontFamily: 'Impact',
+        textCoords: null,
+        textBorderColor: '#000', 
+        textAlign: 'center',
+        textBaseLine: 'middle',
+        textWidth: null,
+        draw: function () {
+            gCtx.fillStyle = this.fontColor;
+            gCtx.strokeStyle = this.textBorderColor;
+            if (this.textWidth.width > gCanvas.width - 50) this.fontSize *= 0.8;
+
+            gCtx.font = this.fontSize + 'px ' + this.fontFamily;
+    
+            gCtx.textAlign = this.textAlign;
+            gCtx.textBaseline = this.textBaseLine;
+            gCtx.fillText(this.textValue, this.textCoords.x, this.textCoords.y);
+            gCtx.strokeText(this.textValue, this.textCoords.x, this.textCoords.y);
+        }
     }]
 }
 
@@ -23,26 +39,16 @@ function addText(){
         fontSize: '16',
         fontColor: 'rgb(0, 0, 0)',
         fontFamily: 'eurofurence',
-        textLocation: {x:'0', y:'0'},
+        textCoords: {x: 50, y: 50},
         textBorderColor: 'rgb(0, 0, 0)', 
     }
     gMeme.txts.push(text);
     gCurrWord++
 }
-// function createMeme(){
-//     var meme = {
-//         image: 'imgs/004.jpg',
-//         text: 'text',
-//         fontSize: '16',
-//         fontColor: 'rgb(0, 0, 0)',
-//         fontFamily: 'eurofurence',
-//         fontStyle: 'none',
-//         textLocation: {x:'0', y:'0'},
-//         textBorderColor: 'rgb(0, 0, 0,0)',
 
-//     }
-//     return meme;
-// }
+function getImage(id) {
+    return document.querySelector(`[data-img-id="${id}"]`);
+}
 //-----------------------------------------------
 
 function createImgTemplate(imageUrl, keywords) {
@@ -98,20 +104,28 @@ function changeText(str) {
     gMeme.txts[gCurrWord].text = str;
 }
 
-function changeFontSize(size) {
-    gMeme.txts[gCurrWord].fontSize = size;
+function changeTextSize(size) {
+    let txt = gMeme.txts[+gMeme.selectedTxt]
+    txt.fontSize = size;
+    return txt;
 }
 
-function changeColor(color) {
-    gMeme.txts[gCurrWord].fontColor = color;
+function changeTextColor(color) {
+    let txt = gMeme.txts[+gMeme.selectedTxt]
+    txt.fontColor = `${color}`;
+    return txt;
 }
 
 function changeFont(font) {
-    gMeme.txts[gCurrWord].fontFamily = font;
+    let txt = gMeme.txts[+gMeme.selectedTxt]
+    txt.fontFamily = `${font}`;
+    return txt;
 }
 
 function changeTextBorderColor(borderColor) {
-    gMeme.txts[gCurrWord].textBorderColor = borderColor;
+    let txt = gMeme.txts[+gMeme.selectedTxt]
+    txt.textBorderColor = `${borderColor}`;
+    return txt;
 }
 
 function getMemeProp() {
@@ -139,13 +153,13 @@ function getImgIdByUrl(imgUrl){
 //FUNCTION - RENDER CAVAS
 
 function setTextPosition(x, y, width, height) {
-    let textLocation = {
+    let textCoords = {
         leftUp: { x: x, y: y + height },
         leftDown: {x: x, y: y},
         rightUp: {x: x + width, y: y + height},
         rightDown: {x: x+width, y: y}
     }   
-    gMeme.txts[gCurrWord].textLocation = textLocation;
+    gMeme.txts[gCurrWord].textCoords = textCoords;
 }
 
 function sortKeywords() {

@@ -19,7 +19,7 @@
             <ul class="clean-list nav-menu">
                 <li class="list-item flex align-center space-around">
                         <label for="keyword-search">Search</label>
-                        <input type="text" id="keyword-search" placeholder="Eg: simply">
+                        <input list="keywords" id="keyword-search" placeholder="Keyword to Search">
                 </li>
 
                 <li class="list-item flex align-center">
@@ -42,39 +42,41 @@
     <main>
         <div class="keyword-search-container flex justify-center flex-column align-center">
             <label for="keyword-search-desktop">Search</label>
-            <input type="text" id="keyword-search-desktop" placeholder="Filter By Keyword">
+            <input list="keywords" id="keyword-search-desktop" placeholder="Filter By Keyword">
             <div class="famous-keyword-container flex align-center space-around flex-wrap"></div>
         </div>
 
         <ul class="clean-list main-gallery"></ul>
 
         <section class="meme-editor-canvas container flex flex-column align-center">
-            <canvas onclick="onDrawText(event)" id="meme-canvas" width="300" height="300">   
-            </canvas>
+            <div class="canvas wrapper">
+                <canvas id="meme-canvas" width="300" height="300"></canvas>
+            </div>
             <div class="meme-editor container flex ">
                 <div class="image-change">
                     <a href="#"> Change Image </a>
                 </div>
                 <div class="text-add-div">
                     <label for="add-text"> Write Meme </label>
-                    <input type="text" class="add-text" onkeyup="renderCanvas()">
+                    <input type="text" class="add-text" data-input-id="0" oninput="onDrawText('0')">
                     <button class="add-text" onclick="onaddText()">+</button>
                 </div>
                 <div class="font-size-div"> 
                     <label for="font-size-change">Font Size: </label>
-                    <input type="number" class="font-size-change" onchange="onChangeFontSize()" placeholder="10" min="10">
+                    <input type="number" class="font-size-change" onchange="onChangeFontSize(this.value)" placeholder="10" min="10">
                 </div>
                 <div class="font-color-div">
                     <label for="font-color-change">Font Color: </label>
-                    <input type="color" class="font-color-change" onchange="onChangeColor()">
+                    <input type="color" class="font-color-change" onchange="onChangeTextColor(this.value)">
                 </div>
                 <div class="font-color-div">
                     <label for="border-color-change">Font Border Color:</label>
-                    <input type="color" class="border-color-change" onchange="onChangeTextBorderColor()">
+                    <input type="color" class="border-color-change" onchange="onChangeTextBorderColor(this.value)">
                 </div>
                 <div class="change-font-div">
                     <label>Change Font:</label>
                     <select onchange="onChangeFont(this.value)">
+                        <option selected="Impact">Impact</option>
                         <option value="eurofurence">Eurofurence</option>
                         <option value="ariel">Ariel</option>
                         <option value="tahoma">Tahoma</option>
@@ -94,6 +96,17 @@
             </div>
         </section>
     </main>
+
+
+
+    <datalist id="keywords">
+  <option value="Internet Explorer">
+  <option value="Firefox">
+  <option value="Google Chrome">
+  <option value="Opera">
+  <option value="Safari">
+    </datalist>
+    
     <script src="js/util.js"></script>
     <script src="js/meme-editor-service.js"></script>
     <script src="js/meme-editor-controller.js"></script>

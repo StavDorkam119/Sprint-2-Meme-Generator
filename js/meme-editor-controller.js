@@ -21,6 +21,7 @@ function init() {
     renderFamousKeywords();
     //Added Responsive Resizing to the Canvas:
     window.addEventListener('resize', setSizeOfCanvas);
+    // document.querySelector.addEventListener('resize', setSizeOfCanvas);
 
 
     document.getElementById("keyword-search").addEventListener('input', onFilterGallery, event)
@@ -36,45 +37,51 @@ function init() {
 
 //FUNCTION - USER EDIT MEME 
 
-function renderCanvas(){
-    const elText = document.querySelector('.add-text').value;
-    changeText(elText);
-    clearCanvas()
+// function renderCanvas(){
+//     const elText = document.querySelector('.add-text').value;
+//     changeText(elText);
+//     clearCanvas()
 
-    let meme = getMemeProp()
-    let memeImg = meme[0].selectedImgId;
-    drawImage(memeImg);
-    changeText(elText);
-    drawText(gCanvas.width/2, gCanvas.height/2)
+//     let meme = getMemeProp()
+//     let memeImg = meme[0].selectedImgId;
+    
+//     drawImage(memeImg);
+//     changeText(elText);
+//     drawText(gCanvas.width/2, gCanvas.height/2)
+// }
+
+function onChangeFontSize(elFontSizeVal) {
+    let elImage = getImage(gMeme.selectedImgId);
+    drawImage(elImage);
+    let txt = changeTextSize(elFontSizeVal);
+    txt.draw();
 }
 
-function onChangeFontSize() {
-    const elFontSize = document.querySelector('.font-size-change').value;
-    changeFontSize(elFontSize)
-    renderCanvas()
-}
-
-function onChangeColor() {
-    const elColor = document.querySelector('.font-color-change').value;
-    changeColor(elColor)
-    renderCanvas()
+function onChangeTextColor(elColor) {
+    let elImage = getImage(gMeme.selectedImgId);
+    drawImage(elImage);
+    let txt = changeTextColor(elColor);
+    txt.draw();
 }
 
 function onChangeFont(elFont) {
-    changeFont(elFont)
-    renderCanvas()
+    let elImage = getImage(gMeme.selectedImgId);
+    drawImage(elImage);
+    let txt = changeFont(elFont);
+    txt.draw();
 }
 
 function onImagePick(id) {
-    let imgPath = getImgUrlById(id).imageUrl
-    changeImage(imgPath)
-    drawImage(imgPath)
+    gMeme.selectedImgId = id;
+    let elImage = getImage(id);
+    drawImage(elImage);
 }
 
-function onChangeTextBorderColor() {
-    let elBorderColor = document.querySelector('.border-color-change').value
-    changeTextBorderColor(elBorderColor)
-    renderCanvas()
+function onChangeTextBorderColor(elColor) {
+    let elImage = getImage(gMeme.selectedImgId);
+    drawImage(elImage);
+    let txt = changeTextBorderColor(elColor);
+    txt.draw();
 }
 
 function onaddText() {
@@ -87,41 +94,31 @@ function onaddText() {
 
 function clearCanvas() {
     gCtx.clearRect(0, 0, gCanvas.width, gCanvas.height);
-    gCtx.fillStyle = 'white'
-    gCtx.fillRect(0, 0, gCanvas.width, gCanvas.height)
 
 }
 
-function drawImage(imgPath) {
-    var img = new Image();
-    img.src = imgPath;
+function drawImage(img) {
     gCtx.drawImage(img, 0, 0, gCanvas.width, gCanvas.height);
 }
 
-function onDrawText(ev) {
-    let { offsetX, offsetY } = ev;
-    drawText(offsetX, offsetY)
-}
 
-function drawText(x, y) {
-    let meme = getMemeProp()    
-    meme = meme[0].txts[meme[1]];
-
-    //font style
-    gCtx.fillStyle = meme.fontColor;
-    gCtx.strokeStyle = meme.textBorderColor;
-    gCtx.font = meme.fontSize + 'px ' + meme.fontFamily;
-
-    //center the text
-    gCtx.textAlign ='center';
-    gCtx.textBaseline = "middle";
+function onDrawText(id) {
+    clearCanvas();
+    let image = getImage(gMeme.selectedImgId);
+    drawImage(image);
+    const input = document.querySelector('[data-input-id="0"]')
+    let text = gMeme.txts[+id];
+    gMeme.selectedTxt = text.textId;
+    text.textValue = input.value;
+    text.textWidth = gCtx.measureText(input.value);
+    text.textCoords = {x: gCanvas.width/2, y: 50};
+    text.draw();
 
     //print the text on canvas
-    gCtx.fillText(meme.text, x, y);
-    gCtx.strokeText(meme.text, x, y)
+    
 
-    let textWidth = gCtx.measureText(meme.text).width;
-    setTextPosition(x, y, textWidth, parseInt(meme.fontSize))
+    // let textWidth = gCtx.measureText(meme.text).width;
+    // setTextPosition(x, y, textWidth, parseInt(meme.fontSize))
 }
 
 
@@ -143,7 +140,7 @@ function renderImageGallery () {
     let mainGallery = document.querySelector('.main-gallery');
     let strHTML = gImgs.map(img => {
         return `
-        <li class="gallery-item"><a><img onclick="onImagePick('${img.id}')"src=${img.imageUrl} /></a></li>`
+        <li class="gallery-item"><a><img data-img-id="${img.id}" onclick="onImagePick('${img.id}')" src=${img.imageUrl} /></a></li>`
     });
     mainGallery.innerHTML = strHTML.join('');
 }
@@ -163,7 +160,7 @@ function setSizeOfCanvas() {
         gCanvas.width = 600;
         gCanvas.height = 600;
     }
-    renderCanvas()
+    drawImage(getImage(gMeme.selectedImgId));
 }
 
 
@@ -191,18 +188,23 @@ function onFilterGallery(event) {
     let mainGallery = document.querySelector('.main-gallery');
     let strHTML = filteredImgs.map(img => {
         return `
-        <li class="gallery-item"><a><img data-id="${img.id}" onclick="onSetCurrMeme('${img.id}')" src=${img.imageUrl} /></a></li>`
+        <li class="gallery-item"><a><img data-id="${img.id}" onclick="onImagePick('${img.id}')" src=${img.imageUrl} /></a></li>`
     });
     mainGallery.innerHTML = strHTML.join('');
 }
 
 function renderFamousKeywords() {
     const elFamousKeywordDisplay = document.querySelector('.famous-keyword-container');
-    let strHTML;
+    const dataList = document.querySelector('#keywords');
+    let strHTML, dataListStr;
     let sortedKeywords = sortKeywords();
     sortedKeywords = sortedKeywords.slice(0, 8);
     strHTML = sortedKeywords.map(item => {
         return `<h3 style="font-size: ${item[1]}em">${item[0]}</h3>`
     })
     elFamousKeywordDisplay.innerHTML = strHTML.join('');
+    dataListStr = sortedKeywords.map(item => {
+        return `<option value="${item[0]}">`
+    });
+    dataList.innerHTML = dataListStr.join('');
 }

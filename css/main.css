@@ -142,6 +142,11 @@ header input:checked+nav {
     margin: 0 auto;
 }
 
+
+.keyword-search-container input, .keyword-search-container label{
+    display: none;
+}
+
 .famous-keyword-container {
     background-color: aqua;
     align-self: stretch;
@@ -398,6 +403,10 @@ option[value=tahoma]{
     .nav-menu-toggle-label {visibility: hidden}
     .nav-menu {display: none}
 
+    .keyword-search-container input, .keyword-search-container label{
+        display: block;
+    }
+    
     .main-gallery.clean-list {
         max-width: 40rem;
         grid-template-columns: repeat(8, 5rem);

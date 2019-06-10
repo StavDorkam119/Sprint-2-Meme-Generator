@@ -225,23 +225,17 @@ canvas {
 .clear-canvas button{
     background-color: rgba(245, 245, 220, 0);
 }
-.image-change ,.text-add-div,.font-size-div,.font-color-div,.font-color-div,.change-font-div,.clear-canvas,.download-meme {
+
+.editor-properties {
     margin-top: 1rem; 
     padding: 1.5rem;
     border-radius: 2px;
-    /* background-color: rgba(1, 66, 58, 0.308); */
     background:linear-gradient(to bottom, rgba(152, 245, 234, 0.308) 5%, rgba(0, 34, 30, 0.308) 100%);
     height: 1.5rem; 
 }
 
-.image-change:hover,
-.text-add-div:hover,
-.font-size-div:hover,
-.font-color-div:hover,
-.font-color-div:hover,
-.change-font-div:hover,
-.clear-canvas:hover,
-.download-meme:hover {
+
+.editor-properties:hover {
     background:linear-gradient(to bottom, rgba(0, 34, 30, 0.308) 5%,  rgba(152, 245, 234, 0.308) 100%);
 
 }

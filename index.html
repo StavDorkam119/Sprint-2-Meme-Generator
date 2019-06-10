@@ -52,27 +52,27 @@
             <canvas onclick="onDrawText(event)" id="meme-canvas" width="300" height="300">   
             </canvas>
             <div class="meme-editor container flex ">
-                <div class="image-change">
+                <div class="change-img editor-properties">
                     <a href="#"> Change Image </a>
                 </div>
-                <div class="text-add-div">
+                <div class="add-text-div editor-properties">
                     <label for="add-text"> Write Meme </label>
                     <input type="text" class="add-text" onkeyup="renderCanvas()">
                     <button class="add-text" onclick="onaddText()">+</button>
                 </div>
-                <div class="font-size-div"> 
+                <div class="font-size editor-properties"> 
                     <label for="font-size-change">Font Size: </label>
                     <input type="number" class="font-size-change" onchange="onChangeFontSize()" placeholder="10" min="10">
                 </div>
-                <div class="font-color-div">
+                <div class="font-color editor-properties">
                     <label for="font-color-change">Font Color: </label>
                     <input type="color" class="font-color-change" onchange="onChangeColor()">
                 </div>
-                <div class="font-color-div">
+                <div class="border-color editor-properties">
                     <label for="border-color-change">Font Border Color:</label>
                     <input type="color" class="border-color-change" onchange="onChangeTextBorderColor()">
                 </div>
-                <div class="change-font-div">
+                <div class="change-font editor-properties">
                     <label>Change Font:</label>
                     <select onchange="onChangeFont(this.value)">
                         <option value="eurofurence">Eurofurence</option>
@@ -84,10 +84,10 @@
                         <option value="lato">Lato</option>
                     </select>
                 </div>
-                <div class="clear-canvas">
+                <div class="editor-properties clear-canvas">
                     <button class="clear-canvas-btn" onclick="clearCanvas()">Clear Meme Editor</button>
                 </div>
-                <div class="download-meme">
+                <div class="editor-properties download-meme">
                     <a class="download-link" href="#" onclick="downloadImg(this)" download="">Download</a>
                 </div>
         

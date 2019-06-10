@@ -19,7 +19,7 @@
             <ul class="clean-list nav-menu">
                 <li class="list-item flex align-center space-around">
                         <label for="keyword-search">Search</label>
-                        <input type="text" id="keyword-search" placeholder="Eg: simply">
+                        <input list="keywords" id="keyword-search" placeholder="Keyword to Search">
                 </li>
 
                 <li class="list-item flex align-center">
@@ -42,7 +42,7 @@
     <main>
         <div class="keyword-search-container flex justify-center flex-column align-center">
             <label for="keyword-search-desktop">Search</label>
-            <input type="text" id="keyword-search-desktop" placeholder="Filter By Keyword">
+            <input list="keywords" id="keyword-search-desktop" placeholder="Filter By Keyword">
             <div class="famous-keyword-container flex align-center space-around flex-wrap"></div>
         </div>
 
@@ -93,8 +93,21 @@
                 </div>
         
             </div>
+            <button onclick="onAddText()">Add Line</button>
+            <div class="meme-editor container flex"></div>
         </section>
     </main>
+
+
+
+    <datalist id="keywords">
+  <option value="Internet Explorer">
+  <option value="Firefox">
+  <option value="Google Chrome">
+  <option value="Opera">
+  <option value="Safari">
+    </datalist>
+    
     <script src="js/util.js"></script>
     <script src="js/meme-editor-service.js"></script>
     <script src="js/meme-editor-controller.js"></script>

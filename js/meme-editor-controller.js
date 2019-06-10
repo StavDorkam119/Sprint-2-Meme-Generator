@@ -20,7 +20,7 @@ function init() {
     //Added Responsive Resizing to the Canvas:
     window.addEventListener('resize', setSizeOfCanvas);
 
-    //Drag The Text
+    //drag the text
     gCanvas.addEventListener('mousemove',ev=>{ 
         let { offsetX, offsetY } = ev;
         if (ev.buttons!==1) return              
@@ -73,6 +73,11 @@ function onChangeTextBorderColor(elColor) {
 
 function onaddText() {
     addText(gCanvas)
+}
+
+function onClickedWord(ev) {
+    // let { offsetX, offsetY } = ev;
+
 }
 
 //------------------------------------------------

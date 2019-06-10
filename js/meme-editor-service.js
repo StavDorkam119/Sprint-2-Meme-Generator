@@ -147,9 +147,10 @@ function checkClickedWord(x, y){
 
     if (selectedWord) {
         selectedWord.textLocation.x = x;
-        selectedWord.textLocation.y = y;  
+        selectedWord.textLocation.y = y;
+        renderCanvas()       
     }
-    renderCanvas() 
+    
     return selectedWord;
 }
 

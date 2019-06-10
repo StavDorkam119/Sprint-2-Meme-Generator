@@ -271,6 +271,12 @@ header input:checked+nav {
     transform-origin: left;
 }
 
+.download-link::after{
+    content: '↓ ';
+    font-size: 2rem;
+    position: absolute;
+}
+
 .meme-editor-buttons button:first-child:hover::before {
     transform: scaleX(1);
     transform-origin: right;
@@ -279,6 +285,7 @@ header input:checked+nav {
 
 #meme-canvas {
     padding: 10px;
+    /* border: 1px solid rgba(155, 204, 247, 0.2) */
 }
 
 .meme-editor {
@@ -303,6 +310,7 @@ header input:checked+nav {
     margin-left: 1rem;
     margin-right: 1rem;
     border: 1px solid rgba(1, 27, 39, 0.616);
+
 }
 
 .meme-editor>div {
@@ -311,6 +319,7 @@ header input:checked+nav {
     border-radius: 5px;
     background: linear-gradient(180deg, rgba(155, 204, 247, 1) 0%, rgba(0, 128, 128, 1) 100%);
     height: 1.5rem;
+
 }
 
 .meme-editor>div:hover {
@@ -321,10 +330,9 @@ header input:checked+nav {
     cursor: pointer;
 }
 
-.add-text {
-    padding: 0 0.4rem;
+.add-text-button {
+    padding: 0 0.7rem;
     font-size: 1.11;
-    background-color: #9bccf7;
     cursor: pointer;
 }
 

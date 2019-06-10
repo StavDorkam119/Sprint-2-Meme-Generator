@@ -271,12 +271,6 @@ header input:checked+nav {
     transform-origin: left;
 }
 
-.download-link::after{
-    content: '↓ ';
-    font-size: 2rem;
-    position: absolute;
-}
-
 .meme-editor-buttons button:first-child:hover::before {
     transform: scaleX(1);
     transform-origin: right;
@@ -285,7 +279,6 @@ header input:checked+nav {
 
 #meme-canvas {
     padding: 10px;
-    /* border: 1px solid rgba(155, 204, 247, 0.2) */
 }
 
 .meme-editor {

@@ -140,6 +140,12 @@ function getImgIdByUrl(imgUrl) {
 
 function setTextPosition(x, y, textWidth, text) {
     text = text || gMeme.txts[gCurrTextIdx]
+    console.log(gMeme.txts[gCurrTextIdx]);
+    console.log(text);
+    console.log(gMeme);
+    
+    
+    
     let textLocation = { x: x, y: y, width: textWidth }
     text.textLocation = textLocation;
 }

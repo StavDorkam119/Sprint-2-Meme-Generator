@@ -21,7 +21,7 @@ function init() {
     
     //Added Responsive Resizing to the Canvas:
     window.addEventListener('resize', setSizeOfCanvas);
-    setTextPosition(gCanvas.width / 2, gCanvas.height / 2)
+
     //drag the text
     gCanvas.addEventListener('mousemove', ev=>{ 
         let { offsetX, offsetY } = ev;
@@ -29,7 +29,8 @@ function init() {
         checkClickedWord(offsetX, offsetY)
     })
 
-
+    setTextPosition(gCanvas.width/2, gCanvas.height/2)
+    
     document.getElementById("keyword-search").addEventListener('input', onFilterGallery, event)
     document.getElementById("keyword-search-desktop").addEventListener('input', onFilterGallery, event)
     setSizeOfCanvas();

@@ -62,7 +62,9 @@ function onChangeFont(elFont) {
 }
 
 function onImagePick(imgId) {
-    document.querySelector('main').classList.toggle('main-editor-mode-padding');
+    if (window.innerWidth >= 672) {
+        document.body.classList.toggle('background-green');
+    }
     document.querySelector('.keyword-search-container').style.display = 'none';
     document.querySelector('.main-gallery').style.display = 'none';
     document.querySelector('.meme-editor-canvas').style.display = 'flex';
@@ -72,7 +74,9 @@ function onImagePick(imgId) {
 }
 
 function onBackToGallery() {
-    document.querySelector('main').classList.toggle('main-editor-mode-padding');
+    if (window.innerWidth >= 672) {
+        document.body.classList.toggle('background-green');
+    }
     document.querySelector('.keyword-search-container').style.display = 'flex';
     document.querySelector('.main-gallery').style.display = 'grid';
     document.querySelector('.meme-editor-canvas').style.display = 'none';

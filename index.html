@@ -11,7 +11,7 @@
 </head>
 
 <body onload="init()">
-
+    <canvas id="background-balls"></canvas>
     <header class="flex align-center">
         <label for="menu-checklist" class="nav-menu-toggle-label justify-self-start"><i class="fas fa-bars"></i></label>
         <input id="menu-checklist" type="checkbox" name="checklist">
@@ -41,19 +41,24 @@
 
     <main>
         <div class="keyword-search-container flex justify-center flex-column align-center">
-            <label for="keyword-search-desktop">Search</label>
-            <input list="keywords" id="keyword-search-desktop" placeholder="Filter By Keyword">
+            <div class="keyword-label-input-container justify-center">
+                <label for="keyword-search-desktop">Search</label>
+                <input list="keywords" id="keyword-search-desktop" placeholder="Filter By Keyword">
+            </div>
             <div class="famous-keyword-container flex align-center space-around flex-wrap"></div>
         </div>
 
         <ul class="clean-list main-gallery"></ul>
 
-        <section class="meme-editor-canvas container flex flex-column align-center">
+        <section class="meme-editor-canvas flex-column align-center">
             <div class="canvas wrapper">
                 <canvas id="meme-canvas" width="300" height="300"></canvas>
             </div>
-            <button onclick="onAddText()">Add Line</button>
-            <div class="meme-editor container flex"></div>
+            <div class="meme-editor-buttons flex">
+                <button onclick="onBackToGallery()">Back To Gallery</button>
+                <button onclick="onAddText()">Add Line</button>
+            </div>
+            <div class="meme-editor flex"></div>
         </section>
     </main>
 
@@ -70,6 +75,7 @@
     <script src="js/util.js"></script>
     <script src="js/meme-editor-service.js"></script>
     <script src="js/meme-editor-controller.js"></script>
+    <script src="js/background-balls.js"></script>
 </body>
 
 </html>

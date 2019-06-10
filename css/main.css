@@ -35,6 +35,7 @@
 
 body {
     margin: 0;
+    height: 100vh;
 }
 
 h1 {
@@ -61,15 +62,26 @@ a {
     color: inherit;
 }
 
+
+#background-balls {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -5;
+}
+
 /* CSS Base Settings */
 
 /* Header */
 
 header {
     padding: 1em 0;
-    background-color: rgba(50, 50, 50, 0.9);
-    color: hotpink;
-    position: relative;
+    background: #00171f;
+    color: #00a8e8;
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
     z-index: 99;
 }
 
@@ -116,6 +128,7 @@ header input:checked+nav {
 .nav-menu li {
     height: 3em;
     font-size: 1.5em;
+    background: #003459;
 }
 
 .list-item+.list-item {
@@ -142,15 +155,36 @@ header input:checked+nav {
     margin: 0 auto;
 }
 
+.keyword-label-input-container {
+    display: none;
+    align-self: stretch;
+    background-color: aquamarine;
+    padding: 1rem;
+}
 
 .keyword-search-container input, .keyword-search-container label{
-    display: none;
+    margin: 0 0 0 1em;
+    font-size: 2rem;
 }
 
 .famous-keyword-container {
-    background-color: aqua;
+    background: #003459;
     align-self: stretch;
     flex-basis: 10rem;
+    color: #bdc2bf;
+}
+
+.famous-keyword-container * {
+    font-family: 'Lato', sans-serif;
+}
+
+.famous-keyword-container h3 {
+    transition: color 0.2s ease-in;
+    margin-right: 1em;
+}
+.famous-keyword-container h3:hover {
+    font-size: 6rem;
+    color: white;
 }
 
 .main-gallery-container {
@@ -159,9 +193,6 @@ header input:checked+nav {
 
 .main-gallery.clean-list {
     display: grid;
-    /* max-width: 20rem; */
-    /* grid-template-columns: repeat(4, 1fr); */
-    /* grid-auto-rows: 160px; */
     margin: 2rem auto;
 }
 
@@ -207,10 +238,30 @@ header input:checked+nav {
 /* Meme Canvas and Editor */
 
 .meme-editor-canvas {
-    background-color: rgb(213, 252, 237);
+    background-color: rgba(76, 175, 80, 0.8);
+    display: none;
 }
 
-canvas {
+.meme-editor-buttons {
+    margin: 2em 0;
+    align-self: stretch;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.meme-editor-buttons button{
+    background: #9bccf7;
+    padding: 0.5em;
+    font-size: 1em;
+    flex-basis: 230px;
+    margin: 0 1em;
+}
+
+.meme-editor-buttons button:first-child{
+    font-size: 2em;
+}
+
+#meme-canvas {
     border:5px dashed silver;
     margin-top: 1.5rem;
 }
@@ -230,31 +281,26 @@ canvas {
 .clear-canvas button{
     background-color: rgba(245, 245, 220, 0);
 }
-.image-change ,.text-add-div,.font-size-div,.font-color-div,.font-color-div,.change-font-div,.clear-canvas,.download-meme {
+
+
+.meme-editor div {
+    background: rgba(0, 23, 31, 0.7);
+    margin-left: 1rem;
+    margin-right: 1rem;
+    border: 1px solid rgba(1, 27, 39, 0.616);
+}
+
+.meme-editor div > div{
     margin-top: 1rem; 
     padding: 1.5rem;
     border-radius: 2px;
     /* background-color: rgba(1, 66, 58, 0.308); */
-    background:linear-gradient(to bottom, rgba(152, 245, 234, 0.308) 5%, rgba(0, 34, 30, 0.308) 100%);
+    background: linear-gradient(180deg, rgba(155,204,247,1) 0%, rgba(0,128,128,1) 100%);
     height: 1.5rem; 
 }
 
-.image-change:hover,
-.text-add-div:hover,
-.font-size-div:hover,
-.font-color-div:hover,
-.font-color-div:hover,
-.change-font-div:hover,
-.clear-canvas:hover,
-.download-meme:hover {
-    background:linear-gradient(to bottom, rgba(0, 34, 30, 0.308) 5%,  rgba(152, 245, 234, 0.308) 100%);
-
-}
-
-.meme-editor div {
-    margin-left: 1rem;
-    margin-right: 1rem;
-    border: 1px solid rgba(1, 27, 39, 0.616);
+.meme-editor div > div:hover {
+    background: linear-gradient(0deg, rgba(155,204,247,1) 0%, rgba(0,128,128,1) 100%);
 }
 
 .clear-canvas-btn:hover {
@@ -358,6 +404,10 @@ option[value=tahoma]{
 
 /* FONTS */
 
+.main-editor-mode-padding {
+    padding: 2em 0;
+}
+
 /* CSS Helpers */
 
 /* Media Rules */
@@ -399,12 +449,15 @@ option[value=tahoma]{
 }
 
 @media (min-width: 42rem) {
+    header {
+        position: relative;
+    }
 
     .nav-menu-toggle-label {visibility: hidden}
     .nav-menu {display: none}
 
-    .keyword-search-container input, .keyword-search-container label{
-        display: block;
+    .keyword-label-input-container {
+        display: flex;
     }
     
     .main-gallery.clean-list {
@@ -418,6 +471,17 @@ option[value=tahoma]{
 }
 
 @media (min-width: 66rem) {
+
+    .meme-editor-buttons {
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .meme-editor-buttons button{
+        flex-basis: unset;
+        margin: 1em 0;
+    }
+
     .meme-editor-canvas {
         flex-direction: row;
         justify-content: space-around;

@@ -30,6 +30,7 @@ function init() {
     document.getElementById("keyword-search").addEventListener('input', onFilterGallery, event)
     document.getElementById("keyword-search-desktop").addEventListener('input', onFilterGallery, event)
     setSizeOfCanvas();
+    initBackground();
 
     //--------------------------------------------
     saveToStorage('gImgs', gImgs);
@@ -75,9 +76,20 @@ function onChangeFont(elFont) {
 }
 
 function onImagePick(id) {
+    document.querySelector('main').classList.toggle('main-editor-mode-padding');
+    document.querySelector('.keyword-search-container').style.display = 'none';
+    document.querySelector('.main-gallery').style.display = 'none';
+    document.querySelector('.meme-editor-canvas').style.display = 'flex';
     gMeme.selectedImgId = id;
     let elImage = getImage(id);
     drawImage(elImage);
+}
+
+function onBackToGallery() {
+    document.querySelector('main').classList.toggle('main-editor-mode-padding');
+    document.querySelector('.keyword-search-container').style.display = 'flex';
+    document.querySelector('.main-gallery').style.display = 'grid';
+    document.querySelector('.meme-editor-canvas').style.display = 'none';
 }
 
 function onChangeTextBorderColor(elColor) {
@@ -165,6 +177,7 @@ function setSizeOfCanvas() {
         gCanvas.width = 600;
         gCanvas.height = 600;
     }
+    if (gMeme.selectedImgId === 0) return;
     drawImage(getImage(gMeme.selectedImgId));
 }
 

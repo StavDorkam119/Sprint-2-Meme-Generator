@@ -2,30 +2,33 @@
 
 let gCanvas;
 let gCtx;
-let mouseHandle;
 
 function init() {
     gCanvas = document.getElementById('meme-canvas');
     gCtx = gCanvas.getContext('2d');
+
     gImgs = loadFromStorage('gImgs');
     if (!gImgs || !gImgs.length) {
         gImgs = gImgsDefault();
     }
+
     gKeywords = loadFromStorage('gKeywords');
     if (!gKeywords) {
         gKeywords = getKeywordsData();
     }
     renderImageGallery();
     renderFamousKeywords();
+    
     //Added Responsive Resizing to the Canvas:
     window.addEventListener('resize', setSizeOfCanvas);
-
+    setTextPosition(gCanvas.width / 2, gCanvas.height / 2)
     //drag the text
-    gCanvas.addEventListener('mousemove',ev=>{ 
+    gCanvas.addEventListener('mousemove', ev=>{ 
         let { offsetX, offsetY } = ev;
         if (ev.buttons!==1) return              
         checkClickedWord(offsetX, offsetY)
     })
+
 
     document.getElementById("keyword-search").addEventListener('input', onFilterGallery, event)
     document.getElementById("keyword-search-desktop").addEventListener('input', onFilterGallery, event)
@@ -71,14 +74,11 @@ function onChangeTextBorderColor(elColor) {
     renderCanvas()
 }
 
-function onaddText() {
-    addText(gCanvas)
+function onAddText() {
+    addText(gCanvas)    
+    setTextPosition(gCanvas.width / 2, gCanvas.height / 2)
 }
 
-function onClickedWord(ev) {
-    // let { offsetX, offsetY } = ev;
-
-}
 
 //------------------------------------------------
 
@@ -94,8 +94,8 @@ function renderCanvas() {
 
     //array of word property
     let memeTxt = meme[0].txts;
-    
-    memeTxt.forEach(text => {       
+
+    memeTxt.forEach(text => {             
         drawText(text)       
     })
 
@@ -114,6 +114,7 @@ function drawImage(imgPath) {
 }
 
 function drawText(meme) {
+   
     gCtx.fillStyle = meme.fontColor;
     gCtx.strokeStyle = meme.textBorderColor;
     gCtx.font = meme.fontSize + 'px ' + meme.fontFamily;
@@ -128,7 +129,8 @@ function drawText(meme) {
     gCtx.strokeText(meme.text, meme.textLocation.x, meme.textLocation.y)
 
     let textWidth = gCtx.measureText(meme).width;
-    setTextPosition(meme.textLocation.x, meme.textLocation.y, textWidth)   
+    
+    setTextPosition(meme.textLocation.x, meme.textLocation.y, textWidth, meme)  
 }
     
 //-----------------------------------------------

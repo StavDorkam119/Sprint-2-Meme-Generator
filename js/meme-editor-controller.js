@@ -159,7 +159,7 @@ function renderImageGallery() {
     let mainGallery = document.querySelector('.main-gallery');
     let strHTML = gImgs.map(img => {
         return `
-        <li class="gallery-item"><a><img onclick="onImagePick('${img.id}')"src=${img.imageUrl} /></a></li>`
+        <li class="gallery-item"><a><img onclick="onImagePick('${img.id}')" src=${img.imageUrl} /></a></li>`
     });
     mainGallery.innerHTML = strHTML.join('');
 }
@@ -218,7 +218,7 @@ function renderFamousKeywords() {
     let sortedKeywords = sortKeywords();
     sortedKeywords = sortedKeywords.slice(0, 8);
     strHTML = sortedKeywords.map(item => {
-        return `<h3 style="font-size: ${item[1]}em">${item[0]}</h3>`
+        return `<h3>${item[0]}</h3>`
     })
     elFamousKeywordDisplay.innerHTML = strHTML.join('');
 }

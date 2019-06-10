@@ -170,7 +170,6 @@ header input:checked+nav {
 .famous-keyword-container {
     background: #003459;
     align-self: stretch;
-    flex-basis: 10rem;
     color: #bdc2bf;
 }
 
@@ -179,11 +178,16 @@ header input:checked+nav {
 }
 
 .famous-keyword-container h3 {
-    transition: color 0.2s ease-in;
-    margin-right: 1em;
+    text-transform: capitalize;
+    margin: 0;
+    flex-basis: 2em;
+    font-size: 2rem;
+    cursor: pointer;
+    padding: 0.5em 0;
+    transition: all 0.4s 0.1s;
 }
 .famous-keyword-container h3:hover {
-    font-size: 6rem;
+    font-size: 3rem;
     color: white;
 }
 
@@ -489,6 +493,15 @@ option[value=tahoma]{
 }
 
 @media (min-width: 66rem) {
+
+    .main-gallery.clean-list {
+        max-width: 50rem;
+        grid-template-columns: repeat(10, 5rem);
+    }
+
+    .gallery-item:nth-child(7n-2) {grid-column: span 2;}
+
+    .gallery-item:nth-child(9n-3) {grid-column: 2/4;}
 
     .meme-editor-buttons {
         flex-direction: column;

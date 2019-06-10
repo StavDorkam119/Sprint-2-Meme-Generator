@@ -19,7 +19,7 @@
             <ul class="clean-list nav-menu">
                 <li class="list-item flex align-center space-around">
                         <label for="keyword-search">Search</label>
-                        <input list="keywords" id="keyword-search" placeholder="Keyword to Search">
+                        <input type="text" id="keyword-search" placeholder="Keyword to Search">
                 </li>
 
                 <li class="list-item flex align-center">
@@ -55,23 +55,55 @@
                 <canvas id="meme-canvas" width="300" height="300"></canvas>
             </div>
             <div class="meme-editor-buttons flex">
-                <button onclick="onBackToGallery()">Back To Gallery</button>
+                <button onclick="onBackToGallery()">back to gallery</button>
                 <button onclick="onAddText()">Add Line</button>
             </div>
-            <div class="meme-editor flex"></div>
+            <div>
+                    <div class="meme-editor flex ">
+                            <div class="change-img editor-properties">
+                                <a href="#"> Change Image </a>
+                            </div>
+                            <div class="add-text-div editor-properties">
+                                <label for="add-text"> Write Meme </label>
+                                <input type="text" class="add-text" onkeyup="onChangeText(this.value)">
+                                <button class="add-text" onclick="onaddText()">+</button>
+                            </div>
+                            <div class="font-size editor-properties"> 
+                                <label for="font-size-change">Font Size: </label>
+                                <input type="number" class="font-size-change" onkeyup="onChangeFontSize(this.value)" placeholder="10" min="10">
+                            </div>
+                            <div class="font-color editor-properties">
+                                <label for="font-color-change">Font Color: </label>
+                                <input type="color" class="font-color-change" onchange=" onChangeColor(this.value)">
+                            </div>
+                            <div class="border-color editor-properties">
+                                <label for="border-color-change">Font Border Color:</label>
+                                <input type="color" class="border-color-change" onchange="onChangeTextBorderColor(this.value)">
+                            </div>
+                            <div class="change-font editor-properties">
+                                <label>Change Font:</label>
+                                <select onchange="onChangeFont(this.value)">
+                                    <option value="eurofurence">Eurofurence</option>
+                                    <option value="ariel">Ariel</option>
+                                    <option value="tahoma">Tahoma</option>
+                                    <option value="acme">Acme</option>
+                                    <option value="bangers">Bangers</option>
+                                    <option value="satisfy">Satisfy</option>
+                                    <option value="lato">Lato</option>
+                                </select>
+                            </div>
+                            <div class="editor-properties clear-canvas">
+                                <button class="clear-canvas-btn" onclick="clearCanvas()">Clear Meme Editor</button>
+                            </div>
+                            <div class="editor-properties download-meme">
+                                <a class="download-link" href="#" onclick="downloadImg(this)" download="">Download</a>
+                            </div>
+                    
+                        </div>
+            </div>
+            
         </section>
     </main>
-
-
-
-    <datalist id="keywords">
-  <option value="Internet Explorer">
-  <option value="Firefox">
-  <option value="Google Chrome">
-  <option value="Opera">
-  <option value="Safari">
-    </datalist>
-    
     <script src="js/util.js"></script>
     <script src="js/meme-editor-service.js"></script>
     <script src="js/meme-editor-controller.js"></script>

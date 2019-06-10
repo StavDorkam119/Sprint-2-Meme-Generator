@@ -10,7 +10,7 @@ function initBackground() {
     gBackGroundCanvas.height = window.innerHeight;
     colors = ['#00b950', '#0946bf', '#1e354c', '#e3e7d3', '#bdc2bf'];
     mouse = {};
-    minRadius = 3;
+    minRadius = 4;
     maxRadius = 40;
     window.addEventListener('resize', () => {
         gBackGroundCanvas.width = window.innerWidth;
@@ -68,7 +68,7 @@ function Circle (x, y, dx, dy, radius, color) {
 
 function createBalls() {
     balls = [];
-    for (let i = 0; i < 200; i++) {
+    for (let i = 0; i < 150; i++) {
         let x = getRandomInt(minRadius, gBackGroundCanvas.width - minRadius);
         let y = getRandomInt(minRadius, gBackGroundCanvas.height - minRadius);
         let noSpeed = true;

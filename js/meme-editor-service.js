@@ -2,53 +2,41 @@
 
 let gImgs;
 let gKeywords;
+let gEditorSettings;
 //the current word, the user edit 
-let gTextCount;
+let gCurrWord = 0;
 
-let gMeme;
 
-function addText(id){
-    return {
-        textValue: '',
-        textId: id,
-        fontSize: '40',
-        fontColor: '#fff',
-        fontFamily: 'Impact',
-        textCoords: null,
-        textBorderColor: '#000', 
-        textAlign: 'center',
-        textBaseLine: 'middle',
-        textWidth: null,
-        draw: function () {
-            gCtx.fillStyle = this.fontColor;
-            gCtx.strokeStyle = this.textBorderColor;
-            if (this.textWidth.width > gCanvas.width - 50) this.fontSize *= 0.8;
-
-            gCtx.font = this.fontSize + 'px ' + this.fontFamily;
-    
-            gCtx.textAlign = this.textAlign;
-            gCtx.textBaseline = this.textBaseLine;
-            gCtx.fillText(this.textValue, this.textCoords.x, this.textCoords.y);
-            gCtx.strokeText(this.textValue, this.textCoords.x, this.textCoords.y);
-        }
-}
+let gMeme = {
+    selectedImgUrl: 0,
+    txts: [{
+        text: '',
+        fontSize: '16',
+        fontColor: 'rgb(0, 0, 0)',
+        fontFamily: 'eurofurence',
+        textLocation: {x: 100, y:100,textWidth:''},
+        textBorderColor: 'rgb(0, 0, 0)', 
+    }]
 }
 
-function getGMemeDefault () {
-     return {
-        selectedImgId: 0,
-        txts: [addText('1')]
-    }
+function addText(canvas){
+    var text = {
+        text: '',
+        fontSize: '16',
+        fontColor: 'rgb(0, 0, 0)',
+        fontFamily: 'eurofurence',
+        textLocation: {x: canvas.width/2, y:canvas.height/2,textWidth:''},
+        textBorderColor: 'rgb(0, 0, 0)', 
+    }    
+    gMeme.txts.push(text);
+    gCurrWord++
 }
 
-function getImage(id) {
-    return document.querySelector(`[data-img-id="${id}"]`);
-}
 //-----------------------------------------------
 
 function createImgTemplate(imageUrl, keywords) {
     //Return image object to push into Img Service Data;
-    return {
+    return  {
         id: makeId(),
         imageUrl: imageUrl,
         keywords: keywords.split(' '),
@@ -75,7 +63,7 @@ function gImgsDefault() {
 
 
 function getKeywordsData() {
-    return gImgs.reduce((acc, img) => {
+   return gImgs.reduce((acc, img) => {
         img.keywords.forEach(keyword => {
             if (!acc[keyword]) acc[keyword] = 1;
             else acc[keyword]++;
@@ -89,46 +77,41 @@ function getKeywordsData() {
 //     }
 // }
 
+//---------------------------------------------
+
 //FUNCTION - USER EDIT MEME 
 
-function setSelectedText(id) {
-    gMeme.selectedText = id;
-}
-
 function changeImage(img) {
-    gMeme.selectedImgId = img;
+    gMeme.selectedImgUrl = img;
 }
 
 function changeText(str) {
     gMeme.txts[gCurrWord].text = str;
 }
 
-function changeTextSize(size) {
-    let txt = gMeme.txts[+gMeme.selectedTxt]
-    txt.fontSize = size;
-    return txt;
+function changeFontSize(size){
+    gMeme.txts[gCurrWord].fontSize = size;
 }
 
-function changeTextColor(color) {
-    let txt = gMeme.txts[+gMeme.selectedTxt]
-    txt.fontColor = `${color}`;
-    return txt;
+function changeColor(color){ 
+    gMeme.txts[gCurrWord].fontColor = color;    
 }
 
 function changeFont(font) {
-    let txt = gMeme.txts[+gMeme.selectedTxt]
-    txt.fontFamily = `${font}`;
-    return txt;
+    gMeme.txts[gCurrWord].fontFamily = font;
 }
 
 function changeTextBorderColor(borderColor) {
-    let txt = gMeme.txts[+gMeme.selectedTxt]
-    txt.textBorderColor = `${borderColor}`;
-    return txt;
+    gMeme.txts[gCurrWord].textBorderColor = borderColor;   
 }
 
+function getMemeProp(){
+    return [gMeme,gCurrWord];
+}
 
 //------------------------------------------------
+
+//FUNCTIONS FIND IMAGE BY ID/URL 
 
 function getImgUrlById(imgId){
     var image = gImgs.find(img=>{
@@ -148,18 +131,31 @@ function getImgIdByUrl(imgUrl){
 
 //FUNCTION - RENDER CAVAS
 
-function setTextPosition(x, y, width, height) {
-    let textCoords = {
-        leftUp: { x: x, y: y + height },
-        leftDown: {x: x, y: y},
-        rightUp: {x: x + width, y: y + height},
-        rightDown: {x: x+width, y: y}
-    }   
-    gMeme.txts[gCurrWord].textCoords = textCoords;
+function setTextPosition(x, y, textWidth) {
+    let textLocation = {x:x,y:y,width:textWidth}
+    gMeme.txts[gCurrWord].textLocation = textLocation;
+}
+
+function checkClickedWord(x, y){
+    let selectedWord = gMeme.txts.find(text=>{        
+        
+        let leftUp = {x:(text.textLocation.x-text.textLocation.width/2), y: (text.textLocation.y+text.fontSize/2)}
+        let rightDown = {x:(text.textLocation.x+text.textLocation.width/2) ,y:(text.textLocation.y-text.fontSize/2)}      
+
+        if (leftUp.x <= x && x <= rightDown.x && leftUp.y >= y && rightDown.y <=y) return text;
+    })
+
+    if (selectedWord) {
+        selectedWord.textLocation.x = x;
+        selectedWord.textLocation.y = y;
+        renderCanvas()       
+    }
+    
+    return selectedWord;
 }
 
 function sortKeywords() {
     let sortedKeywords = Object.entries(gKeywords);
-    sortedKeywords.sort((a, b) => b[1] - a[1]);
+    sortedKeywords.sort((a,b) => b[1] - a[1]);
     return sortedKeywords;
 }

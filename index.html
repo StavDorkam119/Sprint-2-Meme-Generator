@@ -49,28 +49,29 @@
         <ul class="clean-list main-gallery"></ul>
 
         <section class="meme-editor-canvas container flex flex-column align-center">
-            <canvas onclick="onDrawText(event)" id="meme-canvas" width="300" height="300">   
+            <canvas id="meme-canvas" width="300" height="300">   
             </canvas>
+
             <div class="meme-editor container flex ">
                 <div class="change-img editor-properties">
                     <a href="#"> Change Image </a>
                 </div>
                 <div class="add-text-div editor-properties">
                     <label for="add-text"> Write Meme </label>
-                    <input type="text" class="add-text" onkeyup="renderCanvas()">
+                    <input type="text" class="add-text" onkeyup="onChangeText(this.value)">
                     <button class="add-text" onclick="onaddText()">+</button>
                 </div>
                 <div class="font-size editor-properties"> 
                     <label for="font-size-change">Font Size: </label>
-                    <input type="number" class="font-size-change" onchange="onChangeFontSize()" placeholder="10" min="10">
+                    <input type="number" class="font-size-change" onkeyup="onChangeFontSize(this.value)" placeholder="10" min="10">
                 </div>
                 <div class="font-color editor-properties">
                     <label for="font-color-change">Font Color: </label>
-                    <input type="color" class="font-color-change" onchange="onChangeColor()">
+                    <input type="color" class="font-color-change" onchange=" onChangeColor(this.value)">
                 </div>
                 <div class="border-color editor-properties">
                     <label for="border-color-change">Font Border Color:</label>
-                    <input type="color" class="border-color-change" onchange="onChangeTextBorderColor()">
+                    <input type="color" class="border-color-change" onchange="onChangeTextBorderColor(this.value)">
                 </div>
                 <div class="change-font editor-properties">
                     <label>Change Font:</label>

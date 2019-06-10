@@ -20,6 +20,12 @@ function init() {
     //Added Responsive Resizing to the Canvas:
     window.addEventListener('resize', setSizeOfCanvas);
 
+    //Drag The Text
+    gCanvas.addEventListener('mousemove',ev=>{ 
+        let { offsetX, offsetY } = ev;
+        if (ev.buttons!==1) return              
+        checkClickedWord(offsetX, offsetY)
+    })
 
     document.getElementById("keyword-search").addEventListener('input', onFilterGallery, event)
     document.getElementById("keyword-search-desktop").addEventListener('input', onFilterGallery, event)
@@ -28,32 +34,23 @@ function init() {
     //--------------------------------------------
     saveToStorage('gImgs', gImgs);
     saveToStorage('gKeywords', gKeywords);
-} 
+}
 
 //-----------------------------------------------
 
 //FUNCTION - USER EDIT MEME 
 
-function renderCanvas(){
-    const elText = document.querySelector('.add-text').value;
+function onChangeText(elText){
     changeText(elText);
-    clearCanvas()
-
-    let meme = getMemeProp()
-    let memeImg = meme[0].selectedImgId;
-    drawImage(memeImg);
-    changeText(elText);
-    drawText(gCanvas.width/2, gCanvas.height/2)
+    renderCanvas()
 }
 
-function onChangeFontSize() {
-    const elFontSize = document.querySelector('.font-size-change').value;
+function onChangeFontSize(elFontSize) {
     changeFontSize(elFontSize)
     renderCanvas()
 }
 
-function onChangeColor() {
-    const elColor = document.querySelector('.font-color-change').value;
+function onChangeColor(elColor) {
     changeColor(elColor)
     renderCanvas()
 }
@@ -63,28 +60,43 @@ function onChangeFont(elFont) {
     renderCanvas()
 }
 
-function onImagePick(id) {
-    let imgPath = getImgUrlById(id).imageUrl
+function onImagePick(imgId) {
+    let imgPath = getImgUrlById(imgId).imageUrl
     changeImage(imgPath)
     drawImage(imgPath)
 }
 
-function onChangeTextBorderColor() {
-    let elBorderColor = document.querySelector('.border-color-change').value
-    changeTextBorderColor(elBorderColor)
+function onChangeTextBorderColor(elColor) {
+    changeTextBorderColor(elColor)
     renderCanvas()
 }
 
 function onaddText() {
-    addText()
+    addText(gCanvas)
 }
 
 //------------------------------------------------
 
 //FUNCTION - RENDER CAVAS
 
+function renderCanvas() {
+    clearCanvas()
+
+    let meme = getMemeProp()
+    let memeImageUrl = meme[0].selectedImgUrl;
+
+    drawImage(memeImageUrl);
+
+    //array of word property
+    let memeTxt = meme[0].txts;
+    
+    memeTxt.forEach(text => {       
+        drawText(text)       
+    })
+
+}
+
 function clearCanvas() {
-    gCtx.clearRect(0, 0, gCanvas.width, gCanvas.height);
     gCtx.fillStyle = 'white'
     gCtx.fillRect(0, 0, gCanvas.width, gCanvas.height)
 
@@ -96,48 +108,37 @@ function drawImage(imgPath) {
     gCtx.drawImage(img, 0, 0, gCanvas.width, gCanvas.height);
 }
 
-function onDrawText(ev) {
-    let { offsetX, offsetY } = ev;
-    drawText(offsetX, offsetY)
-}
-
-function drawText(x, y) {
-    let meme = getMemeProp()    
-    meme = meme[0].txts[meme[1]];
-
-    //font style
+function drawText(meme) {
     gCtx.fillStyle = meme.fontColor;
     gCtx.strokeStyle = meme.textBorderColor;
     gCtx.font = meme.fontSize + 'px ' + meme.fontFamily;
 
     //center the text
-    gCtx.textAlign ='center';
+    gCtx.textAlign = 'center';
     gCtx.textBaseline = "middle";
 
     //print the text on canvas
-    gCtx.fillText(meme.text, x, y);
-    gCtx.strokeText(meme.text, x, y)
+    
+    gCtx.fillText(meme.text, meme.textLocation.x, meme.textLocation.y);
+    gCtx.strokeText(meme.text, meme.textLocation.x, meme.textLocation.y)
 
-    let textWidth = gCtx.measureText(meme.text).width;
-    setTextPosition(x, y, textWidth, parseInt(meme.fontSize))
+    let textWidth = gCtx.measureText(meme).width;
+    setTextPosition(meme.textLocation.x, meme.textLocation.y, textWidth)   
 }
-
-
+    
 //-----------------------------------------------
 
-
 function downloadImg(elLink) {
-    // var imgContent = gCanvas.toDataURL('image/jpeg');
     let data = gCanvas.toDataURL()
     elLink.href = data
-   
+
     elLink.download = 'YourMeme.jpg'
 }
 
 
 //FUNCTION: Render Image Gallery 
 
-function renderImageGallery () {
+function renderImageGallery() {
     let mainGallery = document.querySelector('.main-gallery');
     let strHTML = gImgs.map(img => {
         return `
@@ -147,17 +148,17 @@ function renderImageGallery () {
 }
 
 function setSizeOfCanvas() {
-    if (window.innerWidth <= 16*22) {
+    if (window.innerWidth <= 16 * 22) {
         gCanvas.width = window.innerWidth - 50;
         gCanvas.height = window.innerWidth - 50;
     }
-    else if (window.innerWidth <= 16*32) {
+    else if (window.innerWidth <= 16 * 32) {
         gCanvas.width = 300;
         gCanvas.height = 300;
-    } else if (window.innerWidth >= 16*42 && window.innerWidth < 16*66) {
+    } else if (window.innerWidth >= 16 * 42 && window.innerWidth < 16 * 66) {
         gCanvas.width = 450;
         gCanvas.height = 450;
-    } else if (window.innerWidth >= 16*66) {
+    } else if (window.innerWidth >= 16 * 66) {
         gCanvas.width = 600;
         gCanvas.height = 600;
     }
@@ -173,9 +174,9 @@ function onFilterGallery(event) {
         renderImageGallery();
         return;
     }
-    if (inputStr[inputStr.length-1] === ' ') return;
+    if (inputStr[inputStr.length - 1] === ' ') return;
     inputStr = inputStr.split(' ');
-    inputStr.forEach((word, index, thisArray)=> {thisArray[index] = `(?=.*${word})`});
+    inputStr.forEach((word, index, thisArray) => { thisArray[index] = `(?=.*${word})` });
     inputStr = '^' + inputStr.join(''); + '.*$';
     let regex = new RegExp(inputStr, 'gi');
     let filteredImgs = gImgs.filter(img => {
@@ -204,3 +205,6 @@ function renderFamousKeywords() {
     })
     elFamousKeywordDisplay.innerHTML = strHTML.join('');
 }
+
+//-------------------------------------------------------------
+

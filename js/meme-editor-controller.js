@@ -33,6 +33,7 @@ function init() {
     document.getElementById("keyword-search").addEventListener('input', onFilterGallery, event)
     document.getElementById("keyword-search-desktop").addEventListener('input', onFilterGallery, event)
     setSizeOfCanvas();
+    initBackground();
 
     //--------------------------------------------
     saveToStorage('gImgs', gImgs);
@@ -64,9 +65,24 @@ function onChangeFont(elFont) {
 }
 
 function onImagePick(imgId) {
+    if (window.innerWidth >= 672) {
+        document.body.classList.toggle('background-green');
+    }
+    document.querySelector('.keyword-search-container').style.display = 'none';
+    document.querySelector('.main-gallery').style.display = 'none';
+    document.querySelector('.meme-editor-canvas').style.display = 'flex';
     let imgPath = getImgUrlById(imgId).imageUrl
     changeImage(imgPath)
     drawImage(imgPath)
+}
+
+function onBackToGallery() {
+    if (window.innerWidth >= 672) {
+        document.body.classList.toggle('background-green');
+    }
+    document.querySelector('.keyword-search-container').style.display = 'flex';
+    document.querySelector('.main-gallery').style.display = 'grid';
+    document.querySelector('.meme-editor-canvas').style.display = 'none';
 }
 
 function onChangeTextBorderColor(elColor) {
@@ -89,7 +105,7 @@ function renderCanvas() {
 
     let meme = getMemeProp()
     let memeImageUrl = meme[0].selectedImgUrl;
-
+    if (!memeImageUrl) return;
     drawImage(memeImageUrl);
 
     //array of word property
@@ -149,7 +165,7 @@ function renderImageGallery() {
     let mainGallery = document.querySelector('.main-gallery');
     let strHTML = gImgs.map(img => {
         return `
-        <li class="gallery-item"><a><img onclick="onImagePick('${img.id}')"src=${img.imageUrl} /></a></li>`
+        <li class="gallery-item"><a><img onclick="onImagePick('${img.id}')" src=${img.imageUrl} /></a></li>`
     });
     mainGallery.innerHTML = strHTML.join('');
 }
@@ -208,7 +224,7 @@ function renderFamousKeywords() {
     let sortedKeywords = sortKeywords();
     sortedKeywords = sortedKeywords.slice(0, 8);
     strHTML = sortedKeywords.map(item => {
-        return `<h3 style="font-size: ${item[1]}em">${item[0]}</h3>`
+        return `<h3>${item[0]}</h3>`
     })
     elFamousKeywordDisplay.innerHTML = strHTML.join('');
 }

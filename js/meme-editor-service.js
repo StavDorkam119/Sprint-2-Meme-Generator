@@ -32,6 +32,20 @@ function addText(canvas) {
     gMeme.txts.push(text);
 }
 
+function resetMeme(canvas) {
+    gMeme = {
+        selectedImgUrl: 0,
+        txts: [{
+            text: '',
+            fontSize: '50',
+            fontColor: '#fff',
+            fontFamily: 'eurofurence',
+            textLocation: { x: canvas.width / 2, y: canvas.height / 2, textWidth: '' },
+            textBorderColor: 'rgb(0, 0, 0)',
+        }]
+    }
+    gCurrTextIdx = 0;
+}
 //-----------------------------------------------
 
 function createImgTemplate(imageUrl, keywords) {

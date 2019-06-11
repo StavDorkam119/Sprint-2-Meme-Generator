@@ -73,6 +73,7 @@ function onImagePick(imgId) {
     document.querySelector('.main-gallery').style.display = 'none';
     document.querySelector('.meme-editor-canvas').style.display = 'flex';
     let imgPath = getImgUrlById(imgId).imageUrl
+    resetMeme(gCanvas)
     changeImage(imgPath)
     drawImage(imgPath)
 }
